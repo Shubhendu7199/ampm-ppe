@@ -43,7 +43,7 @@ resource "azurerm_eventhub_namespace_authorization_rule" "eventhub_namespace_aut
 
   name                = each.value.authorization_rule.name
   namespace_name      = azurerm_eventhub_namespace.eventhub_namespace[each.key].name
-  resource_group_name = each.value.rg_name
+  resource_group_name = var.resource_group_name
 
   listen = true
   send   = true
