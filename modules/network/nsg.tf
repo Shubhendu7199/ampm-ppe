@@ -2,8 +2,8 @@ resource "azurerm_network_security_group" "nsg" {
   # for_each            = local.subnets_by_vnet
   for_each            = { for k, v in local.subnets_by_vnet : k => v if length(regexall(".*GatewaySubnet*", k)) == 0 }
   name                = "nsg-${local.prefix}-${each.value.subnet_name}"
-  resource_group_name = azurerm_resource_group.network.name
-  location            = azurerm_resource_group.network.location
+  resource_group_name = each.value.resource_group_name
+  location            = each.value.rg_location
   tags                = var.tags
 }
 

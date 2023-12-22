@@ -51,6 +51,14 @@ variable "subscription_id" {
   type = string
 }
 
+variable "resource_group_name" {
+  type = string
+}
+
+variable "rg_location" {
+  type = string
+}
+
 variable "networks" {
   description = "Definition for each virtual network we want to create"
   type = map(
