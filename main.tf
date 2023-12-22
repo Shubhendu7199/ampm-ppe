@@ -4,7 +4,7 @@ resource "azurerm_application_insights" "webinsight1" {
   resource_group_name = azurerm_resource_group.ampm.name
   application_type    = "web"
 
-  depends_on = [ azurerm_resource_group.ampm ]
+  depends_on = [azurerm_resource_group.ampm]
 }
 
 resource "azurerm_automation_account" "example" {
@@ -13,7 +13,7 @@ resource "azurerm_automation_account" "example" {
   resource_group_name = azurerm_resource_group.ampm.name
   sku_name            = "Basic"
 
-  depends_on = [ azurerm_resource_group.ampm ]
+  depends_on = [azurerm_resource_group.ampm]
 }
 
 
@@ -36,10 +36,19 @@ module "network" {
   providers = {
     azurerm = azurerm
   }
-  depends_on = [ azurerm_resource_group.ampm ]
+  depends_on = [azurerm_resource_group.ampm]
 }
 
 module "location-lookup" {
   source   = "./modules/location-lookup"
   location = var.region
+}
+
+module "storage_account" {
+  source              = "./modules/storage_account"
+  storage_accounts    = var.storage_accounts
+  resource_group_name = azurerm_resource_group.ampm.name
+  rg_location         = azurerm_resource_group.ampm.location
+  opco                = var.opco
+  environment         = var.environment
 }
