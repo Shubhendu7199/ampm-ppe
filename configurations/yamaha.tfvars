@@ -19,3 +19,17 @@ networks = {
     }
   }
 }
+
+storage_accounts = {
+  sa1 = {
+    account_tier             = "Premium"
+    account_replication_type = "LRS"
+    account_kind             = "FileStorage"
+    file_shares = [
+      { name = "shubhendu", quota = 100, access_tier = "Premium", enabled_protocol = "NFS" },
+    ]
+    containers = [
+      { name = "adminlte" }
+    ]
+  }
+}
