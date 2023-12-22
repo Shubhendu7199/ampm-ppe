@@ -3,7 +3,7 @@ variable "eventhub_resources" {
     sku = string
     network_rulesets = object({
       default_action = string
-      vnets = map(object({
+      vnets = list(object({
         subnet_id = string
       }))
     })
