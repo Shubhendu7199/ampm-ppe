@@ -7,7 +7,7 @@ module "network" {
   environment                              = var.environment
   environment_short                        = local.environment_short
   tags                                     = local.tags
-  log_analytics_workspace                  = data.azurerm_log_analytics_workspace.management
+  log_analytics_workspace                  = azurerm_log_analytics_workspace.law
   nsg_flow_logs_retention_period           = var.nsg_flow_logs_retention_period
   nsg_flow_logs_traffic_analytics_interval = var.nsg_flow_logs_traffic_analytics_interval
   networks                                 = each.value
