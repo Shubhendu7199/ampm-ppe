@@ -37,3 +37,4 @@ locals {
     for val in local.subnet_list : val.subnet_id
   ]
 }
+
