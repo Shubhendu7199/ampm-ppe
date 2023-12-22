@@ -68,12 +68,6 @@ variable "nsg_flow_logs_traffic_analytics_interval" {
   type        = number
 }
 
-variable "location" {
-  type        = string
-  description = "The Azure Region name the resource is being created."
-  nullable    = true
-}
-
 variable "networks" {
   description = "Definition for each virtual network we want to create"
   type = map( # In the outer map we expect the location, for example uksouth)

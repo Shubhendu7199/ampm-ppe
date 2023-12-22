@@ -19,5 +19,5 @@ module "network" {
 
 module "location-lookup" {
   source   = "./modules/location-lookup"
-  location = var.location
+  location = var.region
 }
