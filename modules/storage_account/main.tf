@@ -47,7 +47,7 @@ resource "azurerm_storage_share" "file_shares" {
 }
 
 resource "azurerm_storage_container" "containers" {
-  for_each              = { for idx, blob in local.all_containers : idx => share }
+  for_each              = { for idx, blob in local.all_containers : idx => blob }
   name                  = each.value.container_name
   storage_account_name  = each.value.storage_account_name
   container_access_type = "private"
