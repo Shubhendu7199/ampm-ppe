@@ -51,4 +51,5 @@ module "storage_account" {
   rg_location         = azurerm_resource_group.ampm.location
   opco                = var.opco
   environment         = var.environment
+  depends_on          = [azurerm_resource_group.ampm]
 }
