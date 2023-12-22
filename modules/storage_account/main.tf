@@ -1,3 +1,8 @@
+module "location-lookup" {
+  source   = "../location-lookup"
+  location = var.location
+}
+
 resource "azurerm_storage_account" "storage_accounts" {
   for_each = local.sa_configs
 

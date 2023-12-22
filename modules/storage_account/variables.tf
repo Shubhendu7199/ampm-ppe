@@ -47,3 +47,8 @@ variable "rg_location" {
 variable "subscription_id" {
   type = string
 }
+
+variable "location" {
+  type        = string
+  description = "The Azure region where this component is to be deployed, i.e. uksouth"
+}
