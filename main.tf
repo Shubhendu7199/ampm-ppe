@@ -16,3 +16,8 @@ module "network" {
     azurerm = azurerm
   }
 }
+
+module "location-lookup" {
+  source   = "./modules/location-lookup"
+  location = var.location
+}
