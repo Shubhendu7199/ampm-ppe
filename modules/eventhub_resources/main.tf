@@ -7,7 +7,7 @@ resource "azurerm_eventhub_namespace" "eventhub_namespace" {
   sku                 = each.value.sku
 
   network_rulesets {
-    default_action = each.value.network_rulesets.default_action
+    # default_action = each.value.network_rulesets.default_action
 
     dynamic "virtual_network_rule" {
       for_each = each.value.network_rulesets.vnets != null ? each.value.network_rulesets.vnets : null
