@@ -6,7 +6,7 @@ module "location-lookup" {
 resource "azurerm_storage_account" "storage_accounts" {
   for_each = local.sa_configs
 
-  name                          = "saase${var.opco}${var.client_name}${var.environment}01"
+  name                          = "saase${var.opco}${var.client_name}${var.environment}02"
   resource_group_name           = var.resource_group_name
   location                      = var.rg_location
   account_tier                  = try(each.value.account_tier, "Standard")
@@ -38,7 +38,7 @@ resource "azurerm_storage_share" "file_shares" {
   for_each = { for idx, share in local.all_file_shares : idx => share }
 
   name                 = each.value.share_name
-  storage_account_name = "saase${var.opco}${var.client_name}${var.environment}01"
+  storage_account_name = "saase${var.opco}${var.client_name}${var.environment}02"
   quota                = each.value.quota
   access_tier          = each.value.access_tier
   enabled_protocol     = each.value.enabled_protocol
@@ -54,7 +54,7 @@ resource "azurerm_storage_share" "file_shares" {
 resource "azurerm_storage_container" "containers" {
   for_each              = { for idx, blob in local.all_containers : idx => blob }
   name                  = each.value.container_name
-  storage_account_name  = "saase${var.opco}${var.client_name}${var.environment}01"
+  storage_account_name  = "saase${var.opco}${var.client_name}${var.environment}02"
   container_access_type = "private"
 
   depends_on = [azurerm_storage_account.storage_accounts]
