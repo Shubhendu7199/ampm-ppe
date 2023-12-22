@@ -20,14 +20,14 @@ resource "azurerm_eventhub_namespace" "eventhub_namespace" {
   #   }
   # }
 
-  dynamic "network_rules" {
+  dynamic "network_rulesets" {
     for_each = each.value.network_rulesets != null ? [each.value.network_rulesets] : []
 
     content {
-      default_action = network_rules.value.default_action
+      default_action = network_rulesets.value.default_action
 
       dynamic "virtual_network_rule" {
-        for_each = lookup(network_rules.value, "vnets", {})
+        for_each = lookup(network_rulesets.value, "vnets", {})
 
         content {
           ignore_missing_virtual_network_service_endpoint = false
