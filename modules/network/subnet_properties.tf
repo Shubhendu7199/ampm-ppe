@@ -19,7 +19,6 @@ resource "azapi_update_resource" "subnet_properties" {
   })
   depends_on = [
     azurerm_virtual_network.vnet,
-    azurerm_network_security_group.nsg,
-    azurerm_resource_group.network
+    azurerm_network_security_group.nsg
   ]
 }
