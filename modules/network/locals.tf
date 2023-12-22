@@ -12,7 +12,7 @@ locals {
         vnet_name   = network_name
         subnet_id = format("/subscriptions/%s/resourceGroups/%s/providers/Microsoft.Network/virtualNetworks/%s/subnets/%s",
           var.subscription_id,
-          local.rg_name,
+          var.resource_group_name,
           "vnet-${local.prefix}-${network_name}",
           "snet-${local.prefix}-${subnet_name}"
         )
