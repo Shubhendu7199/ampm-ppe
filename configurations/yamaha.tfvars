@@ -3,7 +3,7 @@ environment     = "p"
 region          = "southeastasia"
 opgroup         = "wt"
 opco            = "ampm"
-client-name     = "yamaha"
+client_name     = "yamaha"
 
 
 networks = {

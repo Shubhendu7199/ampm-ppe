@@ -3,7 +3,7 @@ environment     = "p"
 region          = "southeastasia"
 opgroup         = "wt"
 opco            = "ampm"
-client-name     = "cartier"
+client_name     = "cartier"
 
 
 networks = {
