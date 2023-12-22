@@ -18,11 +18,10 @@ locals {
   all_file_shares = flatten([
     for sa_name, sa_config in var.storage_accounts : [
       for share in coalesce(sa_config.file_shares, []) : {
-        storage_account_name = sa_config.name
-        share_name           = share.name
-        quota                = share.quota
-        access_tier          = share.access_tier
-        enabled_protocol     = share.enabled_protocol
+        share_name       = share.name
+        quota            = share.quota
+        access_tier      = share.access_tier
+        enabled_protocol = share.enabled_protocol
       }
     ]
   ])
@@ -30,8 +29,7 @@ locals {
   all_containers = flatten([
     for sa_name, sa_config in var.storage_accounts : [
       for container in coalesce(sa_config.containers, []) : {
-        storage_account_name = sa_config.name
-        container_name       = container.name
+        container_name = container.name
       }
     ]
   ])
