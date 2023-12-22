@@ -1,5 +1,5 @@
 resource "azurerm_application_insights" "webinsight1" {
-  name                = "appinsight-wpp-wt-${module.location-lookup.location-lookup["location_short"]}-${var.opco}-${var.environment}-01"
+  name                = "appinsight-wpp-wt-${module.location-lookup.location-lookup["location_short"]}-${var.opco}-${var.client_name}-${var.environment}-01"
   location            = azurerm_resource_group.ampm.location
   resource_group_name = azurerm_resource_group.ampm.name
   application_type    = "web"

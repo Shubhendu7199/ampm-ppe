@@ -6,7 +6,7 @@ module "location-lookup" {
 resource "azurerm_storage_account" "storage_accounts" {
   for_each = local.sa_configs
 
-  name                          = "saase${var.opco}${var.environment}01"
+  name                          = "saase${var.opco}${var.client_name}${var.environment}01"
   resource_group_name           = var.resource_group_name
   location                      = var.rg_location
   account_tier                  = try(each.value.account_tier, "Standard")
