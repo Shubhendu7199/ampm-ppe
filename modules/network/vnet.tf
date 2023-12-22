@@ -1,8 +1,8 @@
 resource "azurerm_virtual_network" "vnet" {
   for_each            = var.networks
   name                = "vnet-${local.prefix}-${each.key}"
-  resource_group_name = each.value.resource_group_name
-  location            = each.value.rg_location
+  resource_group_name = var.resource_group_name
+  location            = var.rg_location
   address_space       = each.value.address_space
   dns_servers         = each.value.dns_servers
   tags                = var.tags
