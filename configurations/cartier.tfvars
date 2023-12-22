@@ -22,9 +22,8 @@ networks = {
 
 storage_accounts = {
   sa1 = {
-    account_tier             = "Premium"
+    account_tier             = "Standard"
     account_replication_type = "LRS"
-    account_kind             = "FileStorage"
     file_shares = [
       { name = "shubhendu", quota = 100, access_tier = "Premium", enabled_protocol = "NFS" },
     ]
@@ -43,6 +42,9 @@ eventhub_resources = {
         vnet_rule01 = {
           subnet_id = "/subscriptions/10e0ad56-8242-45e7-b95a-a64f4eb4542f/resourceGroups/rg-wpp-wt-ampm-cartier-ase-01/providers/Microsoft.Network/virtualNetworks/vnet-wt-ampm-cartier-ase-p-dmz-01/subnets/snet-wt-ampm-cartier-ase-p-dmz-subnet-01"
         }
+        # vnet_rule02 = {
+        #   subnet_id = "/subscriptions/10e0ad56-8242-45e7-b95a-a64f4eb4542f/resourceGroups/rg-wpp-wt-ampm-cartier-ase-01/providers/Microsoft.Network/virtualNetworks/vnet-wt-ampm-cartier-ase-p-dmz-01/subnets/snet-wt-ampm-cartier-ase-p-dmz-subnet-02"
+        # }
       }
     }
 
