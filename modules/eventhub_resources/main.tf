@@ -20,17 +20,18 @@ resource "azurerm_eventhub_namespace" "eventhub_namespace" {
   #   }
   # }
 
-  dynamic "network_rulesets" {
-    for_each = each.value.network_rulesets
+  dynamic "network_rules" {
+    for_each = each.value.network_rulesets != null ? [each.value.network_rulesets] : []
 
     content {
-      default_action = network_rulesets.value.default_action
+      default_action = network_rules.value.default_action
 
       dynamic "virtual_network_rule" {
-        for_each = [for k, v in network_rulesets.value : v if k != "default_action"]
+        for_each = lookup(network_rules.value, "vnets", {})
 
         content {
-          subnet_id = virtual_network_rule.value.subnet_id
+          ignore_missing_virtual_network_service_endpoint = false
+          subnet_id                                       = virtual_network_rule.value.subnet_id
         }
       }
     }
