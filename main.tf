@@ -6,7 +6,7 @@ resource "azurerm_application_insights" "webinsight1" {
 }
 
 resource "azurerm_automation_account" "example" {
-  name                = "aa-wpp-wt-${module.location-lookup.location-lookup["location_short"]}}-${var.opco}-${var.environment}-01"
+  name                = "aa-wpp-wt-${module.location-lookup.location-lookup["location_short"]}}-${var.opco}-${var.environment}"
   location            = azurerm_resource_group.ampm.location
   resource_group_name = azurerm_resource_group.ampm.name
   sku_name            = "Basic"
