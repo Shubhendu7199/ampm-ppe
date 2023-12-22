@@ -24,10 +24,10 @@ resource "azurerm_eventhub_namespace" "eventhub_namespace" {
     for_each = each.value.network_rulesets
 
     content {
-      default_action = network_rules.value.default_action
+      default_action = network_rulesets.value.default_action
 
       dynamic "virtual_network_rule" {
-        for_each = [for k, v in network_rules.value : v if k != "default_action"]
+        for_each = [for k, v in network_rulesets.value : v if k != "default_action"]
 
         content {
           subnet_id = virtual_network_rule.value.subnet_id
