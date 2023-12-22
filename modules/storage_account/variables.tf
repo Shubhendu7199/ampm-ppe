@@ -23,6 +23,7 @@ variable "storage_accounts" {
       name = string
     })))
   }))
+  default = null
 }
 
 variable "opco" {
