@@ -52,5 +52,6 @@ module "storage_account" {
   opco                = var.opco
   environment         = var.environment
   subscription_id     = var.subscription_id
+  location            = var.region
   depends_on          = [azurerm_resource_group.ampm]
 }
