@@ -15,6 +15,10 @@ variable "opco" {
   }
 }
 
+variable "client_name" {
+  type = string
+}
+
 variable "region" {
   type = string
 }

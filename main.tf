@@ -33,6 +33,7 @@ module "network" {
   nsg_flow_logs_traffic_analytics_interval = var.nsg_flow_logs_traffic_analytics_interval
   networks                                 = each.value
   subscription_id                          = var.subscription_id
+  client_name                              = var.client_name
   providers = {
     azurerm = azurerm
   }
@@ -53,5 +54,6 @@ module "storage_account" {
   environment         = var.environment
   subscription_id     = var.subscription_id
   location            = var.region
+  client_name         = var.client_name
   depends_on          = [azurerm_resource_group.ampm]
 }

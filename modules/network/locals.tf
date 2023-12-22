@@ -1,6 +1,6 @@
 locals {
   wpp_prefix          = "wpp-${var.opgroup}-${module.location-lookup.location-lookup["location_short"]}-${var.environment_short[var.environment]}"
-  prefix              = "${var.opgroup}-${var.opco}-${module.location-lookup.location-lookup["location_short"]}-${var.environment_short[var.environment]}"
+  prefix              = "${var.opgroup}-${var.opco}-${var.client_name}-${module.location-lookup.location-lookup["location_short"]}-${var.environment_short[var.environment]}"
   ipaddresses_RFC1918 = ["10.0.0.0/8", "172.16.0.0/12", "192.168.0.0/16"]
 
   subnet_list = flatten([

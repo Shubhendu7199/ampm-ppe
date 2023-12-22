@@ -13,6 +13,10 @@ variable "location" {
   description = "The Azure region where this component is to be deployed, i.e. uksouth"
 }
 
+variable "client_name" {
+  type = string
+}
+
 variable "environment" {
   description = "Environment used for naming purposes and tags"
   type        = string
