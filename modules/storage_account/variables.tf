@@ -1,8 +1,5 @@
 variable "storage_accounts" {
   type = map(object({
-    name                     = string
-    resource_group_name      = string
-    location                 = string
     account_tier             = optional(string)
     access_tier              = optional(string)
     nfsv3_enabled            = optional(bool)
