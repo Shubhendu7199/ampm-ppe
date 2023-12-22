@@ -57,3 +57,10 @@ module "storage_account" {
   client_name         = var.client_name
   depends_on          = [azurerm_resource_group.ampm]
 }
+
+module "eventhub_resources" {
+  source              = "./modules/eventhub_resources"
+  eventhub_resources  = var.eventhub_resources
+  resource_group_name = azurerm_resource_group.ampm.name
+  rg_location         = azurerm_resource_group.ampm.location
+}
