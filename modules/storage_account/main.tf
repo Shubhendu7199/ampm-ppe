@@ -56,4 +56,6 @@ resource "azurerm_storage_container" "containers" {
   name                  = each.value.container_name
   storage_account_name  = "saase${var.opco}${var.environment}01"
   container_access_type = "private"
+
+  depends_on = [azurerm_storage_account.storage_accounts]
 }
