@@ -43,3 +43,7 @@ variable "resource_group_name" {
 variable "rg_location" {
   type = string
 }
+
+variable "subscription_id" {
+  type = string
+}

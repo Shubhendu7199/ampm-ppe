@@ -8,7 +8,7 @@ locals {
     ]) :
     format(
       "/subscriptions/%s/resourceGroups/%s/providers/Microsoft.Network/virtualNetworks/%s/subnets/%s",
-      length(split("/", subnet_name)) > 3 ? split("/", subnet_name)[0] : data.azurerm_subscription.current.subscription_id,
+      length(split("/", subnet_name)) > 3 ? split("/", subnet_name)[0] : var.subscription_id,
       split("/", subnet_name)[length(split("/", subnet_name)) - 3],
       split("/", subnet_name)[length(split("/", subnet_name)) - 2],
       split("/", subnet_name)[length(split("/", subnet_name)) - 1],
