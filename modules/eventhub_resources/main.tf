@@ -6,15 +6,32 @@ resource "azurerm_eventhub_namespace" "eventhub_namespace" {
   location            = var.rg_location
   sku                 = each.value.sku
 
-  network_rulesets {
-    default_action = each.value.network_rulesets.default_action
+  #   network_rulesets {
+  #     default_action = each.value.network_rulesets.default_action
 
-    dynamic "virtual_network_rule" {
-      for_each = each.value.network_rulesets.vnets
+  #     dynamic "virtual_network_rule" {
+  #       for_each = each.value.network_rulesets.vnets
 
-      content {
-        ignore_missing_virtual_network_service_endpoint = false
-        subnet_id                                       = virtual_network_rule.value.subnet_id
+  #       content {
+  #         ignore_missing_virtual_network_service_endpoint = false
+  #         subnet_id                                       = virtual_network_rule.value.subnet_id
+  #       }
+  #     }
+  #   }
+  # }
+
+  dynamic "network_rulesets" {
+    for_each = each.value.network_rulesets
+
+    content {
+      default_action = network_rules.value.default_action
+
+      dynamic "virtual_network_rule" {
+        for_each = [for k, v in network_rules.value : v if k != "default_action"]
+
+        content {
+          subnet_id = virtual_network_rule.value.subnet_id
+        }
       }
     }
   }
