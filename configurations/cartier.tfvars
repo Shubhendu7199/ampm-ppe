@@ -42,14 +42,40 @@ eventhub_resources = {
         vnet_rule01 = {
           subnet_id = "/subscriptions/10e0ad56-8242-45e7-b95a-a64f4eb4542f/resourceGroups/rg-wpp-wt-ampm-cartier-ase-01/providers/Microsoft.Network/virtualNetworks/vnet-wt-ampm-cartier-ase-p-dmz-01/subnets/snet-wt-ampm-cartier-ase-p-dmz-subnet-01"
         }
-        # vnet_rule02 = {
-        #   subnet_id = "/subscriptions/10e0ad56-8242-45e7-b95a-a64f4eb4542f/resourceGroups/rg-wpp-wt-ampm-cartier-ase-01/providers/Microsoft.Network/virtualNetworks/vnet-wt-ampm-cartier-ase-p-dmz-01/subnets/snet-wt-ampm-cartier-ase-p-dmz-subnet-02"
-        # }
       }
     }
 
     authorization_rule = {
       name = "authorization-rule-namespace1"
+    }
+
+    eventhubs = {
+      "LineEvent" = {
+        partition_count   = 8
+        message_retention = 7
+        authorization_rule = {
+          name   = "LineEventAuthorizationRule"
+          listen = true
+          send   = true
+        }
+        consumer_groups = [
+          { name = "LineEventAutoReply" },
+          { name = "LineEventTracking" },
+        ]
+      }
+
+      "CampaignInbound" = {
+        partition_count   = 8
+        message_retention = 7
+        authorization_rule = {
+          name   = "CampaignInboundAuthorizationRule"
+          listen = true
+          send   = true
+        }
+        consumer_groups = [
+          { name = "RichMenu" },
+        ]
+      }
     }
   }
 }
