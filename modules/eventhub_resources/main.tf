@@ -1,3 +1,29 @@
+# resource "azurerm_eventhub_namespace" "eventhub_namespace" {
+#   for_each = var.eventhub_resources
+
+#   name                = each.key
+#   resource_group_name = var.resource_group_name
+#   location            = var.rg_location
+#   sku                 = each.value.sku
+
+#   dynamic "network_rulesets" {
+#     for_each = each.value.network_rulesets != null ? [each.value.network_rulesets] : []
+
+#     content {
+#       default_action = network_rulesets.value.default_action
+
+#       dynamic "virtual_network_rule" {
+#         for_each = lookup(network_rulesets.value, "vnets", {})
+
+#         content {
+#           ignore_missing_virtual_network_service_endpoint = false
+#           subnet_id                                       = virtual_network_rule.value.subnet_id
+#         }
+#       }
+#     }
+#   }
+# }
+
 resource "azurerm_eventhub_namespace" "eventhub_namespace" {
   for_each = var.eventhub_resources
 
@@ -13,7 +39,7 @@ resource "azurerm_eventhub_namespace" "eventhub_namespace" {
       default_action = network_rulesets.value.default_action
 
       dynamic "virtual_network_rule" {
-        for_each = lookup(network_rulesets.value, "vnets", {})
+        for_each = network_rulesets.value.vnets != null ? [network_rulesets.value.vnets] : []
 
         content {
           ignore_missing_virtual_network_service_endpoint = false
