@@ -1,29 +1,3 @@
-# resource "azurerm_eventhub_namespace" "eventhub_namespace" {
-#   for_each = var.eventhub_resources
-
-#   name                = each.key
-#   resource_group_name = var.resource_group_name
-#   location            = var.rg_location
-#   sku                 = each.value.sku
-
-#   dynamic "network_rulesets" {
-#     for_each = each.value.network_rulesets != null ? [each.value.network_rulesets] : []
-
-#     content {
-#       default_action = network_rulesets.value.default_action
-
-#       dynamic "virtual_network_rule" {
-#         for_each = lookup(network_rulesets.value, "vnets", {})
-
-#         content {
-#           ignore_missing_virtual_network_service_endpoint = false
-#           subnet_id                                       = virtual_network_rule.value.subnet_id
-#         }
-#       }
-#     }
-#   }
-# }
-
 resource "azurerm_eventhub_namespace" "eventhub_namespace" {
   for_each = var.eventhub_resources
 
@@ -39,7 +13,7 @@ resource "azurerm_eventhub_namespace" "eventhub_namespace" {
       default_action = network_rulesets.value.default_action
 
       dynamic "virtual_network_rule" {
-        for_each = network_rulesets.value.vnets != null ? [network_rulesets.value.vnets] : []
+        for_each = lookup(network_rulesets.value, "vnets", {})
 
         content {
           ignore_missing_virtual_network_service_endpoint = false
@@ -102,17 +76,7 @@ resource "azurerm_eventhub_authorization_rule" "eventhub_authorization_rules" {
 }
 
 resource "azurerm_eventhub_consumer_group" "eventhub_consumer_groups" {
-  for_each = flatten([
-    for ns_name, ns_config in var.eventhub_resources : [
-      for eh_name, eh_config in ns_config.eventhubs : [
-        for cg_config in eh_config.consumer_groups : {
-          namespace_name = ns_name
-          eventhub_name  = eh_name
-          config         = cg_config
-        }
-      ]
-    ]
-  ])
+  for_each = local.test
 
   name                = each.value.config.name
   namespace_name      = each.value.namespace_name
