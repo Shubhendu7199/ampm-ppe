@@ -85,9 +85,9 @@ key_vaults = {
     rbac = [
       {
         object_id               = "1c04cebb-44d4-415b-8a3d-fda50ad86887"
-        key_permissions         = ["get", "list"]
-        secret_permissions      = ["get"]
-        certificate_permissions = ["get", "list"]
+        key_permissions         = ["Get", "List"]
+        secret_permissions      = ["Get"]
+        certificate_permissions = ["Get", "List"]
       }
     ]
   }

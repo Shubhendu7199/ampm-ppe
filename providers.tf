@@ -14,3 +14,13 @@ terraform {
     }
   }
 }
+
+terraform {
+  cloud {
+    organization = "Shubhendu"
+
+    workspaces {
+      name = "cartier"
+    }
+  }
+}
