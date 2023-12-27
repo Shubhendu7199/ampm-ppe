@@ -77,5 +77,5 @@ module "key_vault" {
 module "private_dns_zones" {
   source              = "./modules/private_dns_zones"
   private_dns_zones   = var.private_dns_zones
-  resource_group_name = var.resource_group_name
+  resource_group_name = azurerm_resource_group.ampm.name
 }
