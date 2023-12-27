@@ -1,10 +1,10 @@
-resource "azurerm_app_service" "app_services" {
+resource "azurerm_linux_web_app" "app_services" {
   for_each = { for i in local.app_services_flat : i.app_service_name => i }
 
   name                = each.key
   location            = var.rg_location
   resource_group_name = var.resource_group_name
-  app_service_plan_id = each.value.service_plan_id
+  service_plan_id     = each.value.service_plan_id
   enabled             = each.value.enabled
   https_only          = each.value.https_only
   identity {
@@ -24,18 +24,19 @@ resource "azurerm_app_service" "app_services" {
         node_version = application_stack.value.node_version
       }
     }
-    dynamic "ip_restriction" {
-      for_each = each.value.ip_restriction
-      content {
-        action                    = each.value.site_config.ip_restriction.action
-        headers                   = each.value.site_config.ip_restriction.headers
-        ip_address                = each.value.site_config.ip_restriction.ip_address
-        name                      = each.value.site_config.ip_restriction.name
-        service_tag               = each.value.site_config.ip_restriction.service_tag
-        virtual_network_subnet_id = each.value.site_config.ip_restriction.virtual_network_subnet_id
-      }
+    ip_restriction {
+      action                    = each.value.site_config.ip_restriction.action
+      headers                   = each.value.site_config.ip_restriction.headers
+      ip_address                = each.value.site_config.ip_restriction.ip_address
+      name                      = each.value.site_config.ip_restriction.name
+      service_tag               = each.value.site_config.ip_restriction.service_tag
+      virtual_network_subnet_id = each.value.site_config.ip_restriction.virtual_network_subnet_id
     }
+
+
   }
+
+
 
   app_settings = merge(
     {
