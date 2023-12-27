@@ -80,7 +80,7 @@ eventhub_resources = {
 }
 
 key_vaults = {
-  "MyKeyVault" = {
+  "zarakishubhendu" = {
     sku = "standard"
     rbac = [
       {
