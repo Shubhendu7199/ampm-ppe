@@ -136,7 +136,7 @@ private_endpoints = {
 }
 
 sql_server = {
-  "server_name1" = {
+  "servername1" = {
     sku_name = "GP_Standard_D2ds_v4"
     version  = "8.0.21"
 
