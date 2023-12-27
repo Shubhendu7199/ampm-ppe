@@ -15,10 +15,10 @@ variable "app_services" {
         service_tag               = optional(string)
         virtual_network_subnet_id = optional(string)
       }))
-    })
-    application_stack = object({
-      php_version  = optional(string)
-      node_version = optional(string)
+      application_stack = object({
+        php_version  = optional(string)
+        node_version = optional(string)
+      })
     })
     app_settings    = map(string)
     vnet_connection = object({ subnet_id = string })

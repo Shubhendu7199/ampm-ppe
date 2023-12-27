@@ -16,22 +16,24 @@ resource "azurerm_app_service" "app_services" {
     websockets_enabled = each.value.site_config.websockets_enabled
     app_command_line   = each.value.site_config.app_command_line
 
-    ip_restriction {
-      action                    = each.value.site_config.ip_restriction.action
-      headers                   = each.value.site_config.ip_restriction.headers
-      ip_address                = each.value.site_config.ip_restriction.ip_address
-      name                      = each.value.site_config.ip_restriction.name
-      service_tag               = each.value.site_config.ip_restriction.service_tag
-      virtual_network_subnet_id = each.value.site_config.ip_restriction.virtual_network_subnet_id
+    dynamic "application_stack" {
+      for_each = each.value.application_stack
+
+      content {
+        php_version  = application_stack.value.php_version
+        node_version = application_stack.value.node_version
+      }
     }
-  }
-
-  dynamic "application_stack" {
-    for_each = each.value.application_stack
-
-    content {
-      php_version  = application_stack.value.php_version
-      node_version = application_stack.value.node_version
+    dynamic "ip_restriction" {
+      for_each = each.value.ip_restriction
+      content {
+        action                    = each.value.site_config.ip_restriction.action
+        headers                   = each.value.site_config.ip_restriction.headers
+        ip_address                = each.value.site_config.ip_restriction.ip_address
+        name                      = each.value.site_config.ip_restriction.name
+        service_tag               = each.value.site_config.ip_restriction.service_tag
+        virtual_network_subnet_id = each.value.site_config.ip_restriction.virtual_network_subnet_id
+      }
     }
   }
 

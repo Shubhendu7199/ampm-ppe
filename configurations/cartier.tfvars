@@ -186,9 +186,9 @@ app_services = {
       always_on          = true
       websockets_enabled = false
       app_command_line   = "pm2 start /home/site/wwwroot/ecosystem.config.js --no-daemon"
-    }
-    application_stack = {
-      node_version = "16-lts"
+      application_stack = {
+        node_version = "16-lts"
+      }
     }
     app_settings = {
       "WEBSITE_DNS_SERVER" = "168.63.129.16"
