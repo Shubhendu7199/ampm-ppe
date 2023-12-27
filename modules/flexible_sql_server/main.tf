@@ -11,8 +11,7 @@ resource "azurerm_mysql_flexible_server" "flexsqlserver" {
   storage {
     auto_grow_enabled = true
   }
-  backup_retention_days         = 35
-  public_network_access_enabled = true
+  backup_retention_days = 35
 }
 
 resource "azurerm_mysql_flexible_server_configuration" "mysql_flexserver__configurations" {
