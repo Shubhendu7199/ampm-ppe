@@ -73,3 +73,9 @@ module "key_vault" {
   random_password     = random_password.password.result
   client_name         = var.client_name
 }
+
+module "private_dns_zones" {
+  source              = "./modules/private_dns_zones"
+  private_dns_zones   = var.private_dns_zones
+  resource_group_name = var.resource_group_name
+}

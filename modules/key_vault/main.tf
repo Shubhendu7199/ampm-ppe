@@ -41,6 +41,8 @@ resource "azurerm_key_vault_secret" "keyvaultsecret01" {
   name         = "${var.client_name}-db-admin-user"
   value        = "ampmdbadmin"
   key_vault_id = azurerm_key_vault.keyvault[each.key].id
+
+  depends_on = [azurerm_key_vault_access_policy.default_keyvault_rbac]
 }
 
 resource "azurerm_key_vault_secret" "keyvaultsecret02" {
@@ -48,4 +50,6 @@ resource "azurerm_key_vault_secret" "keyvaultsecret02" {
   name         = "${var.client_name}-db-admin-password"
   value        = var.random_password
   key_vault_id = azurerm_key_vault.keyvault[each.key].id
+
+  depends_on = [azurerm_key_vault_access_policy.default_keyvault_rbac]
 }

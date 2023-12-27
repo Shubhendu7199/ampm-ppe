@@ -92,3 +92,23 @@ key_vaults = {
     ]
   }
 }
+
+
+private_dns_zones = {
+  zone1 = {
+    name = "privatelink.file.core.windows.net"
+    vnet_link = {
+      link01 = {
+        vnet_id = ["dmz-01"]
+      }
+    }
+  }
+  zone2 = {
+    name = "privatelink.azurewebsites.net"
+    vnet_link = {
+      link01 = {
+        vnet_id = ["dmz-01"]
+      }
+    }
+  }
+}
