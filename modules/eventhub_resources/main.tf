@@ -52,7 +52,7 @@ resource "azurerm_eventhub_authorization_rule" "eventhub_authorization_rules" {
   eventhub_name       = each.value.eventhub_name
   resource_group_name = var.resource_group_name
   listen              = try(each.value.config.authorization_rule.listen, null)
-  send                = each.value.config.authorization_rule.send != null ? each.value.config.authorization_rule.send : null
+  send                = try(each.value.config.authorization_rule.send, null)
 }
 
 resource "azurerm_eventhub_consumer_group" "eventhub_consumer_groups" {

@@ -145,8 +145,8 @@ variable "eventhub_resources" {
       message_retention = number
       authorization_rule = object({
         name   = string
-        listen = bool
-        send   = bool
+        listen = optional(bool)
+        send   = optional(bool)
       })
       consumer_groups = list(object({
         name = string
