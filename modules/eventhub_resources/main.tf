@@ -34,6 +34,8 @@ resource "azurerm_eventhub_namespace_authorization_rule" "eventhub_namespace_aut
   listen = true
   send   = true
   manage = true
+
+  depends_on = [azurerm_eventhub.eventhub_namespace]
 }
 
 resource "azurerm_eventhub" "eventhubs" {
@@ -43,6 +45,9 @@ resource "azurerm_eventhub" "eventhubs" {
   resource_group_name = var.resource_group_name
   partition_count     = each.value.partition_count
   message_retention   = each.value.message_retention
+
+  depends_on = [azurerm_eventhub_namespace.eventhub_namespace,
+  azurerm_eventhub_namespace_authorization_rule.eventhub_namespace_authorization_rule]
 }
 
 resource "azurerm_eventhub_authorization_rule" "eventhub_authorization_rules" {
@@ -53,6 +58,10 @@ resource "azurerm_eventhub_authorization_rule" "eventhub_authorization_rules" {
   resource_group_name = var.resource_group_name
   listen              = try(each.value.config.authorization_rule.listen, null)
   send                = try(each.value.config.authorization_rule.send, null)
+
+  depends_on = [azurerm_eventhub.eventhubs,
+    azurerm_eventhub_namespace.eventhub_namespace,
+  azurerm_eventhub_namespace_authorization_rule.eventhub_namespace_authorization_rule]
 }
 
 resource "azurerm_eventhub_consumer_group" "eventhub_consumer_groups" {
@@ -61,4 +70,9 @@ resource "azurerm_eventhub_consumer_group" "eventhub_consumer_groups" {
   namespace_name      = each.value.namespace_name
   eventhub_name       = each.value.eventhub_name
   resource_group_name = var.resource_group_name
+
+  depends_on = [azurerm_eventhub.eventhubs,
+    azurerm_eventhub_authorization_rule.eventhub_authorization_rules,
+    azurerm_eventhub_namespace.eventhub_namespace,
+  azurerm_eventhub_namespace_authorization_rule.eventhub_namespace_authorization_rule]
 }
