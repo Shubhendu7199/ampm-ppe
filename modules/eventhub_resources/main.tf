@@ -35,7 +35,7 @@ resource "azurerm_eventhub_namespace_authorization_rule" "eventhub_namespace_aut
   send   = true
   manage = true
 
-  depends_on = [azurerm_eventhub.eventhub_namespace]
+  depends_on = [azurerm_eventhub_namespace.eventhub_namespace]
 }
 
 resource "azurerm_eventhub" "eventhubs" {
