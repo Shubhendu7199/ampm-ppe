@@ -1,5 +1,5 @@
 resource "azurerm_key_vault" "keyvault" {
-   for_each = { for kv in local.keyvault : kv.keyvault_name => kv }
+  for_each = { for kv in local.keyvault : kv.keyvault_name => kv }
 
   name                        = each.key
   resource_group_name         = var.resource_group_name
@@ -36,3 +36,16 @@ resource "azurerm_key_vault_access_policy" "keyvault_rbac" {
 }
 
 
+resource "azurerm_key_vault_secret" "keyvaultsecret01" {
+  for_each     = { for kv in local.keyvault : kv.keyvault_name => kv }
+  name         = "${var.client_name}-db-admin-user"
+  value        = "ampmdbadmin"
+  key_vault_id = azurerm_key_vault.keyvault[each.key].id
+}
+
+resource "azurerm_key_vault_secret" "keyvaultsecret02" {
+  for_each     = { for kv in local.keyvault : kv.keyvault_name => kv }
+  name         = "${var.client_name}-db-admin-password"
+  value        = var.random_password
+  key_vault_id = azurerm_key_vault.keyvault[each.key].id
+}

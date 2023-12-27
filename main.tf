@@ -70,4 +70,6 @@ module "key_vault" {
   key_vaults          = var.key_vaults
   resource_group_name = azurerm_resource_group.ampm.name
   rg_location         = azurerm_resource_group.ampm.location
+  random_password     = random_password.password
+  client_name         = var.client_name
 }

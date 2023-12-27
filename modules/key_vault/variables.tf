@@ -17,3 +17,11 @@ variable "resource_group_name" {
 variable "rg_location" {
   type = string
 }
+
+variable "client_name" {
+  type = string
+}
+
+variable "random_password" {
+  type = string
+}
