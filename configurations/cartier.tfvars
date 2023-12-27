@@ -53,28 +53,27 @@ eventhub_resources = {
       "LineEvent" = {
         partition_count   = 8
         message_retention = 7
-        # authorization_rule = {
-        #   name   = "LineEventAuthorizationRule"
-        #   listen = true
-        #   send   = true
-        # }
-        # consumer_groups = [
-        #   { name = "LineEventAutoReply" },
-        #   { name = "LineEventTracking" },
-        # ]
+        authorization_rule = {
+          name   = "LineEventAuthorizationRule"
+          listen = true
+        }
+        consumer_groups = [
+          { name = "LineEventAutoReply" },
+          { name = "LineEventTracking" },
+        ]
       }
 
       "CampaignInbound" = {
         partition_count   = 8
         message_retention = 7
-        # authorization_rule = {
-        #   name   = "CampaignInboundAuthorizationRule"
-        #   listen = true
-        #   send   = true
-        # }
-        # consumer_groups = [
-        #   { name = "RichMenu" },
-        # ]
+        authorization_rule = {
+          name   = "CampaignInboundAuthorizationRule"
+          listen = true
+          send   = true
+        }
+        consumer_groups = [
+          { name = "RichMenu" },
+        ]
       }
     }
   }

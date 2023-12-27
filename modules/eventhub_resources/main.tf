@@ -37,12 +37,28 @@ resource "azurerm_eventhub_namespace_authorization_rule" "eventhub_namespace_aut
 }
 
 resource "azurerm_eventhub" "eventhubs" {
-  for_each            = { for k, v in local.test1 : k => v }
+  for_each            = { for k, v in local.eventhub : k => v }
   name                = each.value.name
   namespace_name      = each.value.namespace_name
   resource_group_name = var.resource_group_name
   partition_count     = each.value.partition_count
   message_retention   = each.value.message_retention
-
 }
 
+resource "azurerm_eventhub_authorization_rule" "eventhub_authorization_rules" {
+  for_each            = { for k, v in local.authorization_rule : k => v }
+  name                = each.value.config.authorization_rule.name
+  namespace_name      = each.value.namespace_name
+  eventhub_name       = each.value.eventhub_name
+  resource_group_name = var.resource_group_name
+  listen              = try(each.value.config.authorization_rule.listen, null)
+  send                = try(each.value.config.authorization_rule.send, null)
+}
+
+resource "azurerm_eventhub_consumer_group" "eventhub_consumer_groups" {
+  for_each            = { for k, v in local.consumer_groups : k => v }
+  name                = each.value.config.name
+  namespace_name      = each.value.namespace_name
+  eventhub_name       = each.value.eventhub_name
+  resource_group_name = var.resource_group_name
+}

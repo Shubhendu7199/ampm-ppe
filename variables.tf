@@ -143,14 +143,14 @@ variable "eventhub_resources" {
     eventhubs = map(object({
       partition_count   = number
       message_retention = number
-      # authorization_rule = object({
-      #   name   = string
-      #   listen = bool
-      #   send   = bool
-      # })
-      # consumer_groups = list(object({
-      #   name = string
-      # }))
+      authorization_rule = object({
+        name   = string
+        listen = bool
+        send   = bool
+      })
+      consumer_groups = list(object({
+        name = string
+      }))
     }))
   }))
 }
