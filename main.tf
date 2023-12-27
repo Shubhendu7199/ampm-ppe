@@ -64,3 +64,10 @@ module "eventhub_resources" {
   resource_group_name = azurerm_resource_group.ampm.name
   rg_location         = azurerm_resource_group.ampm.location
 }
+
+module "key_vault" {
+  source              = "./modules/key_vault"
+  key_vaults          = var.key_vaults
+  resource_group_name = azurerm_resource_group.ampm.name
+  rg_location         = azurerm_resource_group.ampm.location
+}

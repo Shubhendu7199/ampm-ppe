@@ -154,3 +154,15 @@ variable "eventhub_resources" {
     }))
   }))
 }
+
+variable "key_vaults" {
+  type = map(object({
+    sku = string
+    rbac = list(object({
+      object_id               = string
+      key_permissions         = list(string)
+      secret_permissions      = list(string)
+      certificate_permissions = list(string)
+    }))
+  }))
+}
