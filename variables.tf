@@ -199,3 +199,35 @@ variable "private_endpoints" {
     }))
   }))
 }
+
+
+variable "sql_server" {
+  type = map(object({
+    sku_name = string
+    version  = string
+    sql_configurations = map(object({
+      name  = string
+      value = string
+    }))
+    sql_firewall_rules = map(object({
+      name             = string
+      start_ip_address = string
+      end_ip_address   = string
+    }))
+  }))
+}
+
+# variable "app_service_plans" {
+#   description = "A map of virtual machines to be deployed into the subscription"
+#   type = map(map(object({
+#     basename                 = string
+#     instancenumber           = string
+#     rgname                   = string
+#     skuname                  = string
+#     ostype                   = string
+#     worker_count             = optional(number)
+#     per_site_scaling_enabled = optional(string)
+#     zone_balancing_enabled   = optional(bool)
+#   })))
+#   default = {}
+# }
