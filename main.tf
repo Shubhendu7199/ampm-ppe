@@ -103,10 +103,10 @@ module "app_service_plan" {
   app_service_plans   = var.app_service_plans
 }
 
-# module "app_services" {
-#   source              = "./modules/app_services"
-#   app_services        = var.app_services
-#   resource_group_name = azurerm_resource_group.ampm.name
-#   rg_location         = azurerm_resource_group.ampm.location
-#   instrumentation_key = azurerm_application_insights.webinsight1.instrumentation_key
-# }
+module "app_services" {
+  source              = "./modules/app_services"
+  app_services        = var.app_services
+  resource_group_name = azurerm_resource_group.ampm.name
+  rg_location         = azurerm_resource_group.ampm.location
+  instrumentation_key = azurerm_application_insights.webinsight1.instrumentation_key
+}

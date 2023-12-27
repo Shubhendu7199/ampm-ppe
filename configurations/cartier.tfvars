@@ -177,29 +177,28 @@ app_service_plans = {
   }
 }
 
-# app_services = {
-#   "app_service02_name" = {
-#     service_plan_id = "your_service_plan_id"
-#     enabled         = true
-#     https_only      = true
-#     site_config = {
-#       always_on          = true
-#       websockets_enabled = false
-#       app_command_line   = "pm2 start /home/site/wwwroot/ecosystem.config.js --no-daemon"
-#     }
-#     application_stack = {
-#       node_version = "16-lts"
-#     }
-#     app_settings = {
-#       "APPINSIGHTS_INSTRUMENTATIONKEY" = "your_instrumentation_key"
-#       "WEBSITE_DNS_SERVER"             = "168.63.129.16"
-#       "TZ"                             = "your_timezone"
-#     }
-#     vnet_connection = {
-#       subnet_id = "your_subnet_id"
-#     }
-#     tags = {
-#       "Architectural Functional Group" = "Frontend"
-#     }
-#   }
-# }
+app_services = {
+  "app_service02_name" = {
+    service_plan_id = "/subscriptions/10e0ad56-8242-45e7-b95a-a64f4eb4542f/resourceGroups/rg-wpp-wt-ampm-cartier-ase-01/providers/Microsoft.Web/serverfarms/app-service-plan1-name"
+    enabled         = true
+    https_only      = true
+    site_config = {
+      always_on          = true
+      websockets_enabled = false
+      app_command_line   = "pm2 start /home/site/wwwroot/ecosystem.config.js --no-daemon"
+    }
+    application_stack = {
+      node_version = "16-lts"
+    }
+    app_settings = {
+      "WEBSITE_DNS_SERVER" = "168.63.129.16"
+      "TZ"                 = "your_timezone"
+    }
+    vnet_connection = {
+      subnet_id = "/subscriptions/10e0ad56-8242-45e7-b95a-a64f4eb4542f/resourceGroups/rg-wpp-wt-ampm-cartier-ase-01/providers/Microsoft.Network/virtualNetworks/vnet-wt-ampm-cartier-ase-p-dmz-01/subnets/snet-wt-ampm-cartier-ase-p-dmz-subnet-01"
+    }
+    tags = {
+      "Architectural Functional Group" = "Frontend"
+    }
+  }
+}
