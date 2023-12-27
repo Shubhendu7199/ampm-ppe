@@ -12,9 +12,9 @@ resource "azurerm_key_vault" "keyvault" {
 }
 
 resource "azurerm_key_vault_access_policy" "keyvault_rbac" {
-  for_each = { for k, v in local.keyvault : k => v }
+  for_each = { for k, v in local.keyvault : k.keyvault_name => v }
 
-  key_vault_id = azurerm_key_vault.keyvault[each.value.keyvault_name].id
+  key_vault_id = azurerm_key_vault.keyvault[each.key].id
   tenant_id    = data.azurerm_client_config.current.tenant_id
   object_id    = each.value.object_id
 
