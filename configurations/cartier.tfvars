@@ -25,7 +25,7 @@ storage_accounts = {
     account_tier             = "Standard"
     account_replication_type = "LRS"
     file_shares = [
-      { name = "shubhendu", quota = 100, access_tier = "Premium", enabled_protocol = "NFS" },
+      { name = "shubhendu", quota = 100, access_tier = "TransactionOptimized" },
     ]
     containers = [
       { name = "adminlte" }
