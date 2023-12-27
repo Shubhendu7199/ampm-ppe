@@ -99,7 +99,7 @@ private_dns_zones = {
     name = "privatelink.file.core.windows.net"
     vnet_link = {
       link01 = {
-        vnet_id = ["dmz-01"]
+        vnet_id = ["vnet-wt-ampm-cartier-ase-p-dmz-01"]
       }
     }
   }
@@ -107,7 +107,7 @@ private_dns_zones = {
     name = "privatelink.azurewebsites.net"
     vnet_link = {
       link01 = {
-        vnet_id = ["dmz-01"]
+        vnet_id = ["vnet-wt-ampm-cartier-ase-p-dmz-01"]
       }
     }
   }
