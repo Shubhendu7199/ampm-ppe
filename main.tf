@@ -88,18 +88,25 @@ module "private_endpoint" {
   depends_on          = [module.private_dns_zones]
 }
 
-module "flexible_sql_server" {
-  source              = "./modules/flexible_sql_server"
-  sql_server          = var.sql_server
+# module "flexible_sql_server" {
+#   source              = "./modules/flexible_sql_server"
+#   sql_server          = var.sql_server
+#   resource_group_name = azurerm_resource_group.ampm.name
+#   rg_location         = azurerm_resource_group.ampm.location
+#   random_password     = random_password.password.result
+# }
+
+module "app_service_plan" {
+  source              = "./modules/app_service_plans"
   resource_group_name = azurerm_resource_group.ampm.name
   rg_location         = azurerm_resource_group.ampm.location
-  random_password     = random_password.password.result
+  app_service_plans   = var.app_service_plans
 }
 
-# module "app_service_plan" {
-#   source            = "./modules/appserviceplan"
-#   for_each          = var.app_service_plans
-#   location          = azurerm_resource_group.ampm.location
-#   app_service_plans = each.value
-#   opgroup           = var.opgroup
+# module "app_services" {
+#   source              = "./modules/app_services"
+#   app_services        = var.app_services
+#   resource_group_name = azurerm_resource_group.ampm.name
+#   rg_location         = azurerm_resource_group.ampm.location
+#   instrumentation_key = azurerm_application_insights.webinsight1.instrumentation_key
 # }

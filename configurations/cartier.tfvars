@@ -135,45 +135,71 @@ private_endpoints = {
   }
 }
 
-sql_server = {
-  "shubhzarakiserver1" = {
-    sku_name = "GP_Standard_D2ds_v4"
-    version  = "8.0.21"
+# sql_server = {
+#   "shubhzarakiserver1" = {
+#     sku_name = "GP_Standard_D2ds_v4"
+#     version  = "8.0.21"
 
-    sql_configurations = {
-      config01 = {
-        name  = "config_name_1"
-        value = "config_value_1"
-      }
-      config02 = {
-        name  = "config_name_2"
-        value = "config_value_2"
-      }
-    }
+#     sql_configurations = {
+#       config01 = {
+#         name  = "config_name_1"
+#         value = "config_value_1"
+#       }
+#       config02 = {
+#         name  = "config_name_2"
+#         value = "config_value_2"
+#       }
+#     }
 
-    sql_firewall_rules = {
-      fwrule01 = {
-        name             = "firewall_rule_1"
-        start_ip_address = "10.0.0.1"
-        end_ip_address   = "10.0.0.10"
-      }
-      fwrule02 = {
-        name             = "firewall_rule_2"
-        start_ip_address = "10.0.0.11"
-        end_ip_address   = "10.0.0.20"
-      }
-    }
+#     sql_firewall_rules = {
+#       fwrule01 = {
+#         name             = "firewall_rule_1"
+#         start_ip_address = "10.0.0.1"
+#         end_ip_address   = "10.0.0.10"
+#       }
+#       fwrule02 = {
+#         name             = "firewall_rule_2"
+#         start_ip_address = "10.0.0.11"
+#         end_ip_address   = "10.0.0.20"
+#       }
+#     }
+#   }
+# }
+
+app_service_plans = {
+  "app-service-plan1-name" = {
+    os_type  = "Windows"
+    sku_name = "B1"
+  }
+  "app-service-plan2-name" = {
+    os_type  = "Linux"
+    sku_name = "F1"
   }
 }
 
-
-# app_service_plans = {
-#   uksouth = {
-#     "pinergynordics-01" = {
-#       basename = "pinergynordics"
-#       skuname  = "P2v3"
-#       ostype   = "Windows"
+# app_services = {
+#   "app_service02_name" = {
+#     service_plan_id = "your_service_plan_id"
+#     enabled         = true
+#     https_only      = true
+#     site_config = {
+#       always_on          = true
+#       websockets_enabled = false
+#       app_command_line   = "pm2 start /home/site/wwwroot/ecosystem.config.js --no-daemon"
 #     }
-
+#     application_stack = {
+#       node_version = "16-lts"
+#     }
+#     app_settings = {
+#       "APPINSIGHTS_INSTRUMENTATIONKEY" = "your_instrumentation_key"
+#       "WEBSITE_DNS_SERVER"             = "168.63.129.16"
+#       "TZ"                             = "your_timezone"
+#     }
+#     vnet_connection = {
+#       subnet_id = "your_subnet_id"
+#     }
+#     tags = {
+#       "Architectural Functional Group" = "Frontend"
+#     }
 #   }
 # }
