@@ -112,3 +112,25 @@ private_dns_zones = {
     }
   }
 }
+
+private_endpoints = {
+  pe1 = {
+    name         = "private-endpoint-5"
+    subnet_name  = "snet-wt-ampm-cartier-ase-p-dmz-subnet-01"
+    vnet_name    = "vnet-wt-ampm-cartier-ase-p-dmz-01"
+    vnet_rg_name = "rg-wpp-wt-ampm-cartier-ase-01"
+
+    private_service_connection = {
+      name                    = "connection-1"
+      is_manual_connection    = false
+      subresource_names       = ["namespace"]
+      target_resource_rg_name = "rg-wpp-wt-ampm-cartier-ase-01"
+      target_resource_type    = "namespace"
+      target_resource_name    = "EvenHubsNamespacee-wpp-wt"
+    }
+    private_dns_zone_group = {
+      name                 = "sa-dns-zone"
+      private_dns_zone_ids = ["privatelink.file.core.windows.net"]
+    }
+  }
+}
