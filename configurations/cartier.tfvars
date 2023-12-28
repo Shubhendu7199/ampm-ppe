@@ -14,6 +14,7 @@ networks = {
         "dmz-subnet-01" = {
           address_prefix    = "10.0.0.0/24"
           service_endpoints = ["Microsoft.Storage", "Microsoft.EventHub", "Microsoft.Web"]
+          delegation        = "Microsoft.Web/serverFarms"
         }
       }
     }
