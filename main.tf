@@ -80,13 +80,13 @@ module "private_dns_zones" {
   resource_group_name = azurerm_resource_group.ampm.name
 }
 
-module "private_endpoint" {
-  source              = "./modules/private_endpoints"
-  private_endpoints   = var.private_endpoints
-  resource_group_name = azurerm_resource_group.ampm.name
-  rg_location         = azurerm_resource_group.ampm.location
-  depends_on          = [module.private_dns_zones]
-}
+# module "private_endpoint" {
+#   source              = "./modules/private_endpoints"
+#   private_endpoints   = var.private_endpoints
+#   resource_group_name = azurerm_resource_group.ampm.name
+#   rg_location         = azurerm_resource_group.ampm.location
+#   depends_on          = [module.private_dns_zones]
+# }
 
 module "flexible_sql_server" {
   source              = "./modules/flexible_sql_server"
