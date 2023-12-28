@@ -18,6 +18,8 @@ variable "private_endpoints" {
       private_dns_zone_ids = optional(list(string))
     }))
   }))
+
+  default = null
 }
 
 variable "resource_group_name" {
