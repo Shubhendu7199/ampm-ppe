@@ -178,7 +178,7 @@ app_service_plans = {
 }
 
 app_services = {
-  "app_service02_name" = {
+  "app-service02-name" = {
     service_plan_id = "/subscriptions/10e0ad56-8242-45e7-b95a-a64f4eb4542f/resourceGroups/rg-wpp-wt-ampm-cartier-ase-01/providers/Microsoft.Web/serverfarms/app-service-plan1-name"
     enabled         = true
     https_only      = true
