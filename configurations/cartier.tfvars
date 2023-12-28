@@ -173,7 +173,7 @@ app_service_plans = {
   }
   "app-service-plan2-name" = {
     os_type  = "Linux"
-    sku_name = "F1"
+    sku_name = "P2v3"
   }
 }
 
