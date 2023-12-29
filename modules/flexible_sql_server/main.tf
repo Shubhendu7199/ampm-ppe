@@ -12,6 +12,10 @@ resource "azurerm_mysql_flexible_server" "flexsqlserver" {
     auto_grow_enabled = true
   }
   backup_retention_days = 35
+
+  lifecycle {
+    ignore_changes = [zone]
+  }
 }
 
 resource "azurerm_mysql_flexible_server_configuration" "mysql_flexserver__configurations" {
