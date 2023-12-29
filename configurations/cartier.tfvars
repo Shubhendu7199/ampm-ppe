@@ -143,12 +143,12 @@ sql_server = {
 
     sql_configurations = {
       config01 = {
-        name  = "config_name_1"
-        value = "config_value_1"
+        name  = "audit_log_enabled"
+        value = "ON"
       }
       config02 = {
-        name  = "config_name_2"
-        value = "config_value_2"
+        name  = "slow_query_log"
+        value = "ON"
       }
     }
 
