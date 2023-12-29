@@ -39,20 +39,18 @@ resource "azurerm_linux_web_app" "app_services" {
     each.value.app_settings
   )
 
+  virtual_network_subnet_id = each.value.vnet_connection.subnet_id
+
   tags = each.value.tags
 }
 
-resource "azurerm_app_service_virtual_network_swift_connection" "app_services_vnet" {
-  for_each = {
-    for key, val in var.app_services :
-    key => val.vnet_connection
-  }
+# resource "azurerm_app_service_virtual_network_swift_connection" "app_services_vnet" {
+#   for_each = {
+#     for key, val in var.app_services :
+#     key => val.vnet_connection
+#   }
 
-  app_service_id = azurerm_linux_web_app.app_services[each.key].id
-  subnet_id      = each.value.subnet_id
-
-  lifecycle {
-    ignore_changes = [subnet_id]
-  }
-}
+#   app_service_id = azurerm_linux_web_app.app_services[each.key].id
+#   subnet_id      = each.value.subnet_id
+# }
 
