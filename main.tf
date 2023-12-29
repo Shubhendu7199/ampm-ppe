@@ -88,13 +88,13 @@ module "private_dns_zones" {
 #   depends_on          = [module.private_dns_zones]
 # }
 
-# module "flexible_sql_server" {
-#   source              = "./modules/flexible_sql_server"
-#   sql_server          = var.sql_server
-#   resource_group_name = azurerm_resource_group.ampm.name
-#   rg_location         = azurerm_resource_group.ampm.location
-#   random_password     = random_password.password.result
-# }
+module "flexible_sql_server" {
+  source              = "./modules/flexible_sql_server"
+  sql_server          = var.sql_server
+  resource_group_name = azurerm_resource_group.ampm.name
+  rg_location         = "uksouth"
+  random_password     = random_password.password.result
+}
 
 module "app_service_plan" {
   source              = "./modules/app_service_plans"
