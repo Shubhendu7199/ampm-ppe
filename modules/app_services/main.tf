@@ -47,6 +47,4 @@ resource "azurerm_app_service_virtual_network_swift_connection" "app_services_vn
 
   app_service_id = azurerm_linux_web_app.app_services[each.key].id
   subnet_id      = each.value.vnet_connection.subnet_id
-
-  depends_on = [azurerm_linux_web_app.app_services]
 }
