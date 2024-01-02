@@ -207,5 +207,12 @@ app_services = {
 servicebus_resources = {
   "shubhenduzaraki" = {
     sku = "Standard"
+    namespace_auth_rules = {
+      "authrule" = {
+        listen = true
+        send   = true
+        manage = false
+      }
+    }
   }
 }

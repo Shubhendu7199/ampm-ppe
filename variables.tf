@@ -265,7 +265,12 @@ variable "app_services" {
 
 variable "servicebus_resources" {
   type = map(object({
-    sku  = string
+    sku = string
+    namespace_auth_rules = map(object({
+      listen = bool
+      send   = bool
+      manage = bool
+    }))
     tags = optional(map(string))
   }))
 }
