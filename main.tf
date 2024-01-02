@@ -89,11 +89,12 @@ module "private_dns_zones" {
 # }
 
 module "flexible_sql_server" {
-  source              = "./modules/flexible_sql_server"
-  sql_server          = var.sql_server
-  resource_group_name = azurerm_resource_group.ampm.name
-  rg_location         = "uksouth"
-  random_password     = random_password.password.result
+  source                     = "./modules/flexible_sql_server"
+  sql_server                 = var.sql_server
+  resource_group_name        = azurerm_resource_group.ampm.name
+  rg_location                = "uksouth"
+  random_password            = random_password.password.result
+  log_analytics_workspace_id = azurerm_log_analytics_workspace.law.id
 }
 
 module "app_service_plan" {
@@ -104,11 +105,12 @@ module "app_service_plan" {
 }
 
 module "app_services" {
-  source              = "./modules/app_services"
-  app_services        = var.app_services
-  resource_group_name = azurerm_resource_group.ampm.name
-  rg_location         = azurerm_resource_group.ampm.location
-  instrumentation_key = azurerm_application_insights.webinsight1.instrumentation_key
+  source                     = "./modules/app_services"
+  app_services               = var.app_services
+  resource_group_name        = azurerm_resource_group.ampm.name
+  rg_location                = azurerm_resource_group.ampm.location
+  instrumentation_key        = azurerm_application_insights.webinsight1.instrumentation_key
+  log_analytics_workspace_id = azurerm_log_analytics_workspace.law.id
 }
 
 

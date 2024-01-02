@@ -36,3 +36,21 @@ resource "azurerm_mysql_flexible_server_firewall_rule" "mysql__flexserver_firewa
   resource_group_name = each.value.resource_group_name
   server_name         = each.value.server_name
 }
+
+resource "azurerm_monitor_diagnostic_setting" "mysqlserverdiag" {
+  for_each                   = var.sql_server
+  name                       = "${each.key}-log"
+  target_resource_id         = azurerm_mysql_flexible_server.flexsqlserver[each.key].id
+  log_analytics_workspace_id = var.log_analytics_workspace_id
+
+
+  enabled_log {
+    category = "MySqlAuditLogs"
+  }
+  enabled_log {
+    category = "MySqlSlowLogs"
+  }
+  metric {
+    category = "AllMetrics"
+  }
+}

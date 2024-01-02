@@ -10,6 +10,10 @@ variable "random_password" {
   type = string
 }
 
+variable "log_analytics_workspace_id" {
+  type = string
+}
+
 variable "sql_server" {
   type = map(object({
     sku_name = string

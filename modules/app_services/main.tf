@@ -45,3 +45,40 @@ resource "azurerm_linux_web_app" "app_services" {
 
   tags = each.value.tags
 }
+
+
+resource "azurerm_monitor_diagnostic_setting" "appservicelog" {
+
+  for_each                   = var.app_services
+  name                       = "${each.key}-log"
+  target_resource_id         = azurerm_linux_web_app.app_services[each.key].id
+  log_analytics_workspace_id = var.log_analytics_workspace_id
+
+  enabled_log {
+    category = "AppServiceAntivirusScanAuditLogs"
+  }
+  enabled_log {
+    category = "AppServiceHTTPLogs"
+  }
+  enabled_log {
+    category = "AppServiceConsoleLogs"
+  }
+  enabled_log {
+    category = "AppServiceAppLogs"
+  }
+  enabled_log {
+    category = "AppServiceFileAuditLogs"
+  }
+  enabled_log {
+    category = "AppServiceAuditLogs"
+  }
+  enabled_log {
+    category = "AppServiceIPSecAuditLogs"
+  }
+  enabled_log {
+    category = "AppServicePlatformLogs"
+  }
+  metric {
+    category = "AllMetrics"
+  }
+}
