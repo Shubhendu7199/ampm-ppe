@@ -214,5 +214,18 @@ servicebus_resources = {
         manage = false
       }
     }
+    topics = {
+      "shubhendu" = {
+        topic_auth_rules = {
+          "authrule" = {
+            listen = true
+            manage = false
+            send   = false
+          }
+        }
+      }
+    }
   }
 }
+
+

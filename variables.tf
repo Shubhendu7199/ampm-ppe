@@ -271,6 +271,13 @@ variable "servicebus_resources" {
       send   = bool
       manage = bool
     }))
+    topics = map(object({
+      topic_auth_rules = map(object({
+        listen = bool
+        send   = bool
+        manage = bool
+      }))
+    }))
     tags = optional(map(string))
   }))
 }
