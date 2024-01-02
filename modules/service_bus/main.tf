@@ -47,3 +47,20 @@ resource "azurerm_servicebus_subscription" "servicebus_subscription" {
 
   depends_on = [azurerm_servicebus_topic.servicebus_topic]
 }
+
+resource "azurerm_monitor_diagnostic_setting" "servicebus1log" {
+  for_each                   = var.servicebus_resources
+  name                       = "${each.key}-log"
+  target_resource_id         = azurerm_servicebus_namespace.servicebus_namespace[each.key].id
+  log_analytics_workspace_id = var.log_analytics_workspace_id
+
+  enabled_log {
+    category = "OperationalLogs"
+  }
+  enabled_log {
+    category = "VNetAndIPFilteringLogs"
+  }
+  metric {
+    category = "AllMetrics"
+  }
+}

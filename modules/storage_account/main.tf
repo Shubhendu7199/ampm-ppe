@@ -59,3 +59,51 @@ resource "azurerm_storage_container" "containers" {
 
   depends_on = [azurerm_storage_account.storage_accounts]
 }
+
+resource "azurerm_monitor_diagnostic_setting" "storageccountlog" {
+  for_each                   = local.sa_configs
+  name                       = "saase${var.opco}${var.client_name}${var.environment}02-log"
+  target_resource_id         = azurerm_storage_account.storage_accounts[each.key].id
+  log_analytics_workspace_id = var.log_analytics_workspace_id
+  metric {
+    category = "Transaction"
+  }
+}
+
+resource "azurerm_monitor_diagnostic_setting" "storageccountbloblog" {
+  for_each                   = local.sa_configs
+  name                       = "saase${var.opco}${var.client_name}${var.environment}02-log"
+  target_resource_id         = "${azurerm_storage_account.storage_accounts[each.key].id}/blobServices/default/"
+  log_analytics_workspace_id = var.log_analytics_workspace_id
+  enabled_log {
+    category = "StorageRead"
+  }
+  enabled_log {
+    category = "StorageWrite"
+  }
+  enabled_log {
+    category = "StorageDelete"
+  }
+  metric {
+    category = "Transaction"
+  }
+}
+
+resource "azurerm_monitor_diagnostic_setting" "storageccountfilelog" {
+  for_each                   = local.sa_configs
+  name                       = "saase${var.opco}${var.client_name}${var.environment}02-log"
+  target_resource_id         = "${azurerm_storage_account.storage_accounts[each.key].id}/fileServices/default/"
+  log_analytics_workspace_id = var.log_analytics_workspace_id
+  enabled_log {
+    category = "StorageRead"
+  }
+  enabled_log {
+    category = "StorageWrite"
+  }
+  enabled_log {
+    category = "StorageDelete"
+  }
+  metric {
+    category = "Transaction"
+  }
+}

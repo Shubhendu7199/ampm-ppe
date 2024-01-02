@@ -81,4 +81,6 @@ resource "azurerm_monitor_diagnostic_setting" "appservicelog" {
   metric {
     category = "AllMetrics"
   }
+
+  depends_on = [azurerm_linux_web_app.app_services]
 }

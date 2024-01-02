@@ -53,3 +53,18 @@ resource "azurerm_key_vault_secret" "keyvaultsecret02" {
 
   depends_on = [azurerm_key_vault_access_policy.default_keyvault_rbac]
 }
+
+
+resource "azurerm_monitor_diagnostic_setting" "keyvault1log" {
+  for_each                   = { for kv in local.keyvault : kv.keyvault_name => kv }
+  name                       = "${each.key}-log"
+  target_resource_id         = azurerm_key_vault.keyvault[each.key].id
+  log_analytics_workspace_id = var.log_analytics_workspace_id
+
+  enabled_log {
+    category = "AuditEvent"
+  }
+  metric {
+    category = "AllMetrics"
+  }
+}

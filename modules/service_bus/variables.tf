@@ -6,6 +6,10 @@ variable "rg_location" {
   type = string
 }
 
+variable "log_analytics_workspace_id" {
+  type = string
+}
+
 variable "servicebus_resources" {
   type = map(object({
     sku = string

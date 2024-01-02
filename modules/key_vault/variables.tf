@@ -25,3 +25,7 @@ variable "client_name" {
 variable "random_password" {
   type = string
 }
+
+variable "log_analytics_workspace_id" {
+  type = string
+}

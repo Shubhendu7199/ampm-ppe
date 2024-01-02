@@ -34,3 +34,7 @@ variable "resource_group_name" {
 variable "rg_location" {
   type = string
 }
+
+variable "log_analytics_workspace_id" {
+  type = string
+}

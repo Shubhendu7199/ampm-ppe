@@ -76,3 +76,36 @@ resource "azurerm_eventhub_consumer_group" "eventhub_consumer_groups" {
     azurerm_eventhub_namespace.eventhub_namespace,
   azurerm_eventhub_namespace_authorization_rule.eventhub_namespace_authorization_rule]
 }
+
+
+resource "azurerm_monitor_diagnostic_setting" "eventhubnamespacelog" {
+  for_each                   = var.eventhub_resources
+  name                       = "${each.key}-log"
+  target_resource_id         = azurerm_eventhub_namespace.eventhub_namespace[each.key].id
+  log_analytics_workspace_id = var.log_analytics_workspace_id
+
+  enabled_log {
+    category = "ArchiveLogs"
+  }
+  enabled_log {
+    category = "OperationalLogs"
+  }
+  enabled_log {
+    category = "AutoScaleLogs"
+  }
+  enabled_log {
+    category = "KafkaCoordinatorLogs"
+  }
+  enabled_log {
+    category = "KafkaUserErrorLogs"
+  }
+  enabled_log {
+    category = "EventHubVNetConnectionEvent"
+  }
+  enabled_log {
+    category = "CustomerManagedKeyUserLogs"
+  }
+  metric {
+    category = "AllMetrics"
+  }
+}
