@@ -266,6 +266,6 @@ variable "app_services" {
 variable "servicebus_resources" {
   type = map(object({
     sku  = string
-    tags = map(string)
+    tags = optional(map(string))
   }))
 }
