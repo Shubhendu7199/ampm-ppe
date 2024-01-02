@@ -203,3 +203,9 @@ app_services = {
     }
   }
 }
+
+servicebus_resources = {
+  "namespace1" = {
+    sku = "Standard"
+  }
+}

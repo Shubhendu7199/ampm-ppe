@@ -110,3 +110,11 @@ module "app_services" {
   rg_location         = azurerm_resource_group.ampm.location
   instrumentation_key = azurerm_application_insights.webinsight1.instrumentation_key
 }
+
+
+module "servicebus_resources" {
+  source               = "./modules/service_bus"
+  servicebus_resources = var.servicebus_resources
+  resource_group_name  = azurerm_resource_group.ampm.name
+  rg_location          = azurerm_resource_group.ampm.location
+}

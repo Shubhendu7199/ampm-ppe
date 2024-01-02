@@ -262,3 +262,10 @@ variable "app_services" {
     tags = map(string)
   }))
 }
+
+variable "servicebus_resources" {
+  type = map(object({
+    sku  = string
+    tags = map(string)
+  }))
+}

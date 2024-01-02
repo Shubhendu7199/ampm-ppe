@@ -17,8 +17,10 @@ resource "azurerm_linux_web_app" "app_services" {
     dynamic "ip_restriction" {
       for_each = each.value.site_config.ip_restriction == null ? [] : [1]
       content {
-        action                    = each.value.site_config.ip_restriction.action
-        headers                   = each.value.site_config.ip_restriction.headers
+        action = each.value.site_config.ip_restriction.action
+        headers {
+          x_azure_fdid = ["${each.value.site_config.ip_restriction.headers}"]
+        }
         ip_address                = each.value.site_config.ip_restriction.ip_address
         name                      = each.value.site_config.ip_restriction.name
         service_tag               = each.value.site_config.ip_restriction.service_tag
@@ -43,14 +45,3 @@ resource "azurerm_linux_web_app" "app_services" {
 
   tags = each.value.tags
 }
-
-# resource "azurerm_app_service_virtual_network_swift_connection" "app_services_vnet" {
-#   for_each = {
-#     for key, val in var.app_services :
-#     key => val.vnet_connection
-#   }
-
-#   app_service_id = azurerm_linux_web_app.app_services[each.key].id
-#   subnet_id      = each.value.subnet_id
-# }
-

@@ -12,7 +12,7 @@ variable "app_services" {
 
       ip_restriction = optional(object({
         action                    = string
-        headers                   = map(list(string))
+        headers                   = optional(map(list(string)))
         ip_address                = optional(string)
         name                      = string
         service_tag               = optional(string)
