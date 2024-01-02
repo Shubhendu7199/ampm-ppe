@@ -8,7 +8,7 @@ resource "azurerm_servicebus_namespace" "servicebus_namespace" {
   tags = each.value.tags
 }
 
-resource "azurerm_servicebus_namespace_authorization_rule" "example" {
+resource "azurerm_servicebus_namespace_authorization_rule" "namespace_authorization_rule" {
   for_each     = { for k, v in local.namespace_auth_rules : k => v }
   name         = each.value.auth_rule_name
   namespace_id = azurerm_servicebus_namespace.servicebus_namespace[each.value.namespace_name].id
