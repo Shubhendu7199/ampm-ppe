@@ -1,7 +1,7 @@
 subscription_id = "10e0ad56-8242-45e7-b95a-a64f4eb4542f"
 environment     = "p"
 region          = "southeastasia"
-opgroup         = "wt"
+opgroup         = ""
 opco            = "ampm"
 client_name     = "yamaha"
 
