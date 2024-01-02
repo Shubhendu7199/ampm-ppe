@@ -205,7 +205,7 @@ app_services = {
 }
 
 servicebus_resources = {
-  "namespace1" = {
+  "shubhenduzaraki" = {
     sku = "Standard"
   }
 }
