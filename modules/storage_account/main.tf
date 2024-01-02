@@ -67,6 +67,7 @@ resource "azurerm_monitor_diagnostic_setting" "storageccountlog" {
   log_analytics_workspace_id = var.log_analytics_workspace_id
   metric {
     category = "Transaction"
+    enabled  = true
   }
 
   depends_on = [azurerm_storage_account.storage_accounts]
@@ -88,6 +89,7 @@ resource "azurerm_monitor_diagnostic_setting" "storageccountbloblog" {
   }
   metric {
     category = "Transaction"
+    enabled  = true
   }
 
   depends_on = [azurerm_storage_account.storage_accounts,
@@ -110,6 +112,7 @@ resource "azurerm_monitor_diagnostic_setting" "storageccountfilelog" {
   }
   metric {
     category = "Transaction"
+    enabled  = true
   }
 
   depends_on = [azurerm_storage_account.storage_accounts,
