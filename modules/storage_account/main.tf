@@ -68,6 +68,8 @@ resource "azurerm_monitor_diagnostic_setting" "storageccountlog" {
   metric {
     category = "Transaction"
   }
+
+  depends_on = [azurerm_storage_account.storage_accounts]
 }
 
 resource "azurerm_monitor_diagnostic_setting" "storageccountbloblog" {
@@ -87,6 +89,9 @@ resource "azurerm_monitor_diagnostic_setting" "storageccountbloblog" {
   metric {
     category = "Transaction"
   }
+
+  depends_on = [azurerm_storage_account.storage_accounts,
+  azurerm_storage_container.containers]
 }
 
 resource "azurerm_monitor_diagnostic_setting" "storageccountfilelog" {
@@ -106,4 +111,7 @@ resource "azurerm_monitor_diagnostic_setting" "storageccountfilelog" {
   metric {
     category = "Transaction"
   }
+
+  depends_on = [azurerm_storage_account.storage_accounts,
+  azurerm_storage_share.file_shares]
 }

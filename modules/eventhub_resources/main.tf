@@ -108,4 +108,5 @@ resource "azurerm_monitor_diagnostic_setting" "eventhubnamespacelog" {
   metric {
     category = "AllMetrics"
   }
+  depends_on = [azurerm_eventhub_namespace.eventhub_namespace]
 }

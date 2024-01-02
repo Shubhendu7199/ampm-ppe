@@ -67,4 +67,6 @@ resource "azurerm_monitor_diagnostic_setting" "keyvault1log" {
   metric {
     category = "AllMetrics"
   }
+
+  depends_on = [azurerm_key_vault.keyvault]
 }

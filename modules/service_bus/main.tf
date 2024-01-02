@@ -63,4 +63,6 @@ resource "azurerm_monitor_diagnostic_setting" "servicebus1log" {
   metric {
     category = "AllMetrics"
   }
+
+  depends_on = [azurerm_servicebus_namespace.servicebus_namespace]
 }
