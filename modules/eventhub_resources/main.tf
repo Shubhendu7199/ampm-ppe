@@ -57,7 +57,7 @@ resource "azurerm_eventhub" "eventhubs" {
 
 resource "azurerm_eventhub_authorization_rule" "eventhub_authorization_rules" {
   for_each            = { for k, v in local.authorization_rule : k => v }
-  name                = "evh-auth-rule-wpp-wt-ampm-${module.location-lookup.location-lookup["location_short"]}-${var.environment}-${var.client_name}-${each.value.config.authorization_rule.name}"
+  name                = "evh-authrule-wpp-wt-ampm-${var.environment}-${var.client_name}-${each.value.config.authorization_rule.name}"
   namespace_name      = each.value.namespace_name
   eventhub_name       = each.value.eventhub_name
   resource_group_name = var.resource_group_name
