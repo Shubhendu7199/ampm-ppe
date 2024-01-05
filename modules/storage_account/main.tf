@@ -38,7 +38,7 @@ resource "azurerm_storage_share" "file_shares" {
   for_each = { for idx, share in local.all_file_shares : idx => share }
 
   name                 = "share${each.value.share_name}"
-  storage_account_name = "st${module.location-lookup.location-lookup["location_short"]}wtampm${var.client_name}${var.environment}"
+  storage_account_name = "st${module.location-lookup.location-lookup["location_short"]}wtampm${var.client_name}${var.environment}${each.value.index_number}"
   quota                = each.value.quota
   access_tier          = each.value.access_tier
   enabled_protocol     = each.value.enabled_protocol
@@ -54,7 +54,7 @@ resource "azurerm_storage_share" "file_shares" {
 resource "azurerm_storage_container" "containers" {
   for_each              = { for idx, blob in local.all_containers : idx => blob }
   name                  = each.value.container_name
-  storage_account_name  = "st${module.location-lookup.location-lookup["location_short"]}wtampm${var.client_name}${var.environment}"
+  storage_account_name  = "st${module.location-lookup.location-lookup["location_short"]}wtampm${var.client_name}${var.environment}${each.value.index_number}"
   container_access_type = "private"
 
   depends_on = [azurerm_storage_account.storage_accounts]
