@@ -6,7 +6,7 @@ module "location-lookup" {
 resource "azurerm_eventhub_namespace" "eventhub_namespace" {
   for_each = var.eventhub_resources
 
-  name                = "evhns-wpp-wt-ampm-${module.location-lookup.location-lookup["location_short"]}-${var.environment}-${var.client_name}-${each.key}"
+  name                = "evhns-wpp-wt-ampm-${var.environment}-${var.client_name}-${each.key}"
   resource_group_name = var.resource_group_name
   location            = var.rg_location
   sku                 = each.value.sku
