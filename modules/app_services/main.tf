@@ -1,7 +1,12 @@
+module "location-lookup" {
+  source   = "../location-lookup"
+  location = var.region
+}
+
 resource "azurerm_linux_web_app" "app_services" {
   for_each = var.app_services
 
-  name                = each.key
+  name                = "app-wpp-wt-ampm-${module.location-lookup.location-lookup["location_short"]}-${var.environment}-${var.client_name}-${each.key}"
   location            = var.rg_location
   resource_group_name = var.resource_group_name
 
@@ -50,7 +55,7 @@ resource "azurerm_linux_web_app" "app_services" {
 resource "azurerm_monitor_diagnostic_setting" "appservicelog" {
 
   for_each                   = var.app_services
-  name                       = "${each.key}-log"
+  name                       = "app-${var.client_name}-${var.environment}-${each.key}-log"
   target_resource_id         = azurerm_linux_web_app.app_services[each.key].id
   log_analytics_workspace_id = var.log_analytics_workspace_id
 

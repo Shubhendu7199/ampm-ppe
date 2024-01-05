@@ -1,5 +1,5 @@
 resource "azurerm_log_analytics_workspace" "law" {
-  name                = "law-${var.opco}-${var.client_name}-01"
+  name                = "log-wpp-wt-ampm-${module.location-lookup.location-lookup["location_short"]}-${var.environment}-${var.client_name}"
   location            = azurerm_resource_group.ampm.location
   resource_group_name = azurerm_resource_group.ampm.name
   sku                 = "PerGB2018"

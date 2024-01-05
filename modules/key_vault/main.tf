@@ -1,7 +1,12 @@
+module "location-lookup" {
+  source   = "../location-lookup"
+  location = var.region
+}
+
 resource "azurerm_key_vault" "keyvault" {
   for_each = { for kv in local.keyvault : kv.keyvault_name => kv }
 
-  name                        = each.key
+  name                        = "kv-wpp-wt-ampm-${module.location-lookup.location-lookup["location_short"]}-${var.environment}-${var.client_name}-${each.key}"
   resource_group_name         = var.resource_group_name
   location                    = var.rg_location
   sku_name                    = each.value.sku
@@ -57,7 +62,7 @@ resource "azurerm_key_vault_secret" "keyvaultsecret02" {
 
 resource "azurerm_monitor_diagnostic_setting" "keyvault1log" {
   for_each                   = { for kv in local.keyvault : kv.keyvault_name => kv }
-  name                       = "${each.key}-log"
+  name                       = "kv-wpp-wt-ampm-${var.client_name}-${var.environment}-${each.key}-log"
   target_resource_id         = azurerm_key_vault.keyvault[each.key].id
   log_analytics_workspace_id = var.log_analytics_workspace_id
 

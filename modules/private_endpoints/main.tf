@@ -1,7 +1,12 @@
+module "location-lookup" {
+  source   = "../location-lookup"
+  location = var.region
+}
+
 resource "azurerm_private_endpoint" "private_endpoints" {
   for_each = local.private_endpoints_config
 
-  name                = each.value.name
+  name                = "pep-wpp-wt-ampm-${module.location-lookup.location-lookup["location_short"]}-${var.environment}-${var.client_name}-${each.value.name}"
   location            = var.rg_location
   resource_group_name = var.resource_group_name
   subnet_id           = local.subnet_id[each.key]

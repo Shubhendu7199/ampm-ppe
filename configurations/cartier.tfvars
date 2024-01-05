@@ -23,6 +23,7 @@ networks = {
 
 storage_accounts = {
   sa1 = {
+    index_number             = 01
     account_tier             = "Standard"
     account_replication_type = "LRS"
     file_shares = [

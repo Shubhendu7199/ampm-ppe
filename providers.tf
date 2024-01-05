@@ -20,7 +20,7 @@ terraform {
     organization = "Shubhendu"
 
     workspaces {
-      name = "cartier"
+      name = "cartier-dev"
     }
   }
 }

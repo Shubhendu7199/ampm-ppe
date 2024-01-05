@@ -1,7 +1,12 @@
+module "location-lookup" {
+  source   = "../location-lookup"
+  location = var.region
+}
+
 resource "azurerm_mysql_flexible_server" "flexsqlserver" {
   for_each = var.sql_server
 
-  name                   = each.key
+  name                   = "sql-wpp-wt-ampm-${module.location-lookup.location-lookup["location_short"]}-${var.environment}-${var.client_name}-${each.key}"
   location               = var.rg_location
   resource_group_name    = var.resource_group_name
   administrator_login    = "ampmdbadmin"
@@ -39,7 +44,7 @@ resource "azurerm_mysql_flexible_server_firewall_rule" "mysql__flexserver_firewa
 
 resource "azurerm_monitor_diagnostic_setting" "mysqlserverdiag" {
   for_each                   = var.sql_server
-  name                       = "${each.key}-log"
+  name                       = "sql-wpp-wt-ampm-${var.client_name}-${var.environment}-${each.key}-log"
   target_resource_id         = azurerm_mysql_flexible_server.flexsqlserver[each.key].id
   log_analytics_workspace_id = var.log_analytics_workspace_id
 

@@ -1,5 +1,6 @@
 variable "storage_accounts" {
   type = map(object({
+    index_number             = number
     account_tier             = optional(string)
     access_tier              = optional(string)
     nfsv3_enabled            = optional(bool)
@@ -24,10 +25,6 @@ variable "storage_accounts" {
     })))
   }))
   default = null
-}
-
-variable "opco" {
-  type = string
 }
 
 variable "environment" {

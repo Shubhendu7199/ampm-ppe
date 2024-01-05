@@ -48,16 +48,6 @@ variable "region_shortcut" {
   }
 }
 
-variable "la_name" {
-  description = "The name of the Log Analytics workspace instance"
-  type        = string
-}
-
-variable "la_rg" {
-  description = "The resource group where the Log Analytics instance resides"
-  type        = string
-}
-
 variable "subscription_id" {
   type = string
 }
@@ -101,6 +91,7 @@ variable "resource_group_name" {
 
 variable "storage_accounts" {
   type = map(object({
+    index_number             = number
     account_tier             = optional(string)
     access_tier              = optional(string)
     nfsv3_enabled            = optional(bool)

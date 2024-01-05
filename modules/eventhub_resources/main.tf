@@ -1,7 +1,12 @@
+module "location-lookup" {
+  source   = "../location-lookup"
+  location = var.region
+}
+
 resource "azurerm_eventhub_namespace" "eventhub_namespace" {
   for_each = var.eventhub_resources
 
-  name                = each.key
+  name                = "evhns-wpp-wt-ampm-${module.location-lookup.location-lookup["location_short"]}-${var.environment}-${var.client_name}-${each.key}"
   resource_group_name = var.resource_group_name
   location            = var.rg_location
   sku                 = each.value.sku
@@ -27,7 +32,7 @@ resource "azurerm_eventhub_namespace" "eventhub_namespace" {
 resource "azurerm_eventhub_namespace_authorization_rule" "eventhub_namespace_authorization_rule" {
   for_each = var.eventhub_resources
 
-  name                = each.value.authorization_rule.name
+  name                = "evhns-authrule-wpp-wt-ampm-${module.location-lookup.location-lookup["location_short"]}-${var.environment}-${var.client_name}-${each.value.authorization_rule.name}"
   namespace_name      = azurerm_eventhub_namespace.eventhub_namespace[each.key].name
   resource_group_name = var.resource_group_name
 
@@ -40,7 +45,7 @@ resource "azurerm_eventhub_namespace_authorization_rule" "eventhub_namespace_aut
 
 resource "azurerm_eventhub" "eventhubs" {
   for_each            = { for k, v in local.eventhub : k => v }
-  name                = each.value.name
+  name                = "evh-wpp-wt-ampm-${module.location-lookup.location-lookup["location_short"]}-${var.environment}-${var.client_name}-${each.value.name}"
   namespace_name      = each.value.namespace_name
   resource_group_name = var.resource_group_name
   partition_count     = each.value.partition_count
@@ -52,7 +57,7 @@ resource "azurerm_eventhub" "eventhubs" {
 
 resource "azurerm_eventhub_authorization_rule" "eventhub_authorization_rules" {
   for_each            = { for k, v in local.authorization_rule : k => v }
-  name                = each.value.config.authorization_rule.name
+  name                = "evh-auth-rule-wpp-wt-ampm-${module.location-lookup.location-lookup["location_short"]}-${var.environment}-${var.client_name}-${each.value.config.authorization_rule.name}"
   namespace_name      = each.value.namespace_name
   eventhub_name       = each.value.eventhub_name
   resource_group_name = var.resource_group_name
@@ -66,7 +71,7 @@ resource "azurerm_eventhub_authorization_rule" "eventhub_authorization_rules" {
 
 resource "azurerm_eventhub_consumer_group" "eventhub_consumer_groups" {
   for_each            = { for k, v in local.consumer_groups : k => v }
-  name                = each.value.config.name
+  name                = "evh-consgrp-${module.location-lookup.location-lookup["location_short"]}-${var.environment}-${var.client_name}-${each.value.config.name}"
   namespace_name      = each.value.namespace_name
   eventhub_name       = each.value.eventhub_name
   resource_group_name = var.resource_group_name
@@ -80,7 +85,7 @@ resource "azurerm_eventhub_consumer_group" "eventhub_consumer_groups" {
 
 resource "azurerm_monitor_diagnostic_setting" "eventhubnamespacelog" {
   for_each                   = var.eventhub_resources
-  name                       = "${each.key}-log"
+  name                       = "evhns-${var.client_name}-${var.environment}-${each.key}-log"
   target_resource_id         = azurerm_eventhub_namespace.eventhub_namespace[each.key].id
   log_analytics_workspace_id = var.log_analytics_workspace_id
 

@@ -29,3 +29,16 @@ variable "random_password" {
 variable "log_analytics_workspace_id" {
   type = string
 }
+
+variable "environment" {
+  type = string
+}
+
+variable "client_name" {
+  type = string
+}
+
+variable "region" {
+  type        = string
+  description = "The Azure region where this component is to be deployed"
+}

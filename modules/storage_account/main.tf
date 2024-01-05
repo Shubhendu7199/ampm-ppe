@@ -6,7 +6,7 @@ module "location-lookup" {
 resource "azurerm_storage_account" "storage_accounts" {
   for_each = local.sa_configs
 
-  name                          = "saase${var.opco}${var.client_name}${var.environment}02"
+  name                          = "st${module.location-lookup.location-lookup["location_short"]}wtampm${var.client_name}${var.environment}${each.value.index_number}"
   resource_group_name           = var.resource_group_name
   location                      = var.rg_location
   account_tier                  = try(each.value.account_tier, "Standard")
@@ -37,8 +37,8 @@ resource "azurerm_storage_account" "storage_accounts" {
 resource "azurerm_storage_share" "file_shares" {
   for_each = { for idx, share in local.all_file_shares : idx => share }
 
-  name                 = each.value.share_name
-  storage_account_name = "saase${var.opco}${var.client_name}${var.environment}02"
+  name                 = "share${each.value.share_name}"
+  storage_account_name = "st${module.location-lookup.location-lookup["location_short"]}wtampm${var.client_name}${var.environment}"
   quota                = each.value.quota
   access_tier          = each.value.access_tier
   enabled_protocol     = each.value.enabled_protocol
@@ -54,7 +54,7 @@ resource "azurerm_storage_share" "file_shares" {
 resource "azurerm_storage_container" "containers" {
   for_each              = { for idx, blob in local.all_containers : idx => blob }
   name                  = each.value.container_name
-  storage_account_name  = "saase${var.opco}${var.client_name}${var.environment}02"
+  storage_account_name  = "st${module.location-lookup.location-lookup["location_short"]}wtampm${var.client_name}${var.environment}"
   container_access_type = "private"
 
   depends_on = [azurerm_storage_account.storage_accounts]
@@ -62,7 +62,7 @@ resource "azurerm_storage_container" "containers" {
 
 resource "azurerm_monitor_diagnostic_setting" "storageccountlog" {
   for_each                   = local.sa_configs
-  name                       = "saase${var.opco}${var.client_name}${var.environment}02-log"
+  name                       = "st${module.location-lookup.location-lookup["location_short"]}ampm${var.client_name}${var.environment}${each.value.index_number}-log"
   target_resource_id         = azurerm_storage_account.storage_accounts[each.key].id
   log_analytics_workspace_id = var.log_analytics_workspace_id
   metric {
@@ -75,7 +75,7 @@ resource "azurerm_monitor_diagnostic_setting" "storageccountlog" {
 
 resource "azurerm_monitor_diagnostic_setting" "storageccountbloblog" {
   for_each                   = local.sa_configs
-  name                       = "saase${var.opco}${var.client_name}${var.environment}02-log"
+  name                       = "st${module.location-lookup.location-lookup["location_short"]}ampm${var.client_name}${var.environment}${each.value.index_number}-log"
   target_resource_id         = "${azurerm_storage_account.storage_accounts[each.key].id}/blobServices/default/"
   log_analytics_workspace_id = var.log_analytics_workspace_id
   enabled_log {
@@ -98,7 +98,7 @@ resource "azurerm_monitor_diagnostic_setting" "storageccountbloblog" {
 
 resource "azurerm_monitor_diagnostic_setting" "storageccountfilelog" {
   for_each                   = local.sa_configs
-  name                       = "saase${var.opco}${var.client_name}${var.environment}02-log"
+  name                       = "st${module.location-lookup.location-lookup["location_short"]}ampm${var.client_name}${var.environment}${each.value.index_number}-log"
   target_resource_id         = "${azurerm_storage_account.storage_accounts[each.key].id}/fileServices/default/"
   log_analytics_workspace_id = var.log_analytics_workspace_id
   enabled_log {
