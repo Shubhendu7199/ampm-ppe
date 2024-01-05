@@ -21,7 +21,6 @@ module "network" {
   source                                   = "./modules/network"
   for_each                                 = var.networks
   opgroup                                  = var.opgroup
-  opco                                     = var.opco
   location                                 = each.key
   environment                              = var.environment
   environment_short                        = local.environment_short

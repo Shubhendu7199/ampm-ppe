@@ -7,14 +7,6 @@ variable "opgroup" {
   }
 }
 
-variable "opco" {
-  type = string
-  validation {
-    condition     = length(var.opco) <= 13
-    error_message = "Opgroup should be less than or equal to 13 characters."
-  }
-}
-
 variable "client_name" {
   type = string
 }

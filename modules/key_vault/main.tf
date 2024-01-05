@@ -60,7 +60,7 @@ resource "azurerm_key_vault_secret" "keyvaultsecret02" {
 }
 
 
-resource "azurerm_monitor_diagnostic_setting" "keyvault1log" {
+resource "azurerm_monitor_diagnostic_setting" "keyvaultlog" {
   for_each                   = { for kv in local.keyvault : kv.keyvault_name => kv }
   name                       = "kv-wpp-wt-ampm-${var.client_name}-${var.environment}-${each.key}-log"
   target_resource_id         = azurerm_key_vault.keyvault[each.key].id

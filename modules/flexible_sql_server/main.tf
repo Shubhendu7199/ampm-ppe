@@ -23,7 +23,7 @@ resource "azurerm_mysql_flexible_server" "flexsqlserver" {
   }
 }
 
-resource "azurerm_mysql_flexible_server_configuration" "mysql_flexserver__configurations" {
+resource "azurerm_mysql_flexible_server_configuration" "mysql_flexserver_configurations" {
   for_each = { for k, v in local.config : k => v }
 
   name                = each.value.name
@@ -32,7 +32,7 @@ resource "azurerm_mysql_flexible_server_configuration" "mysql_flexserver__config
   server_name         = each.value.server_name
 }
 
-resource "azurerm_mysql_flexible_server_firewall_rule" "mysql__flexserver_firewall_rules" {
+resource "azurerm_mysql_flexible_server_firewall_rule" "mysql_flexserver_firewall_rules" {
   for_each = { for k, v in local.fw_rules : k => v }
 
   name                = each.value.name
