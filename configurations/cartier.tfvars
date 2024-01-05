@@ -47,7 +47,7 @@ eventhub_resources = {
     }
 
     authorization_rule = {
-      name = "authorization-rule-namespace1"
+      name = "rule-01"
     }
 
     eventhubs = {

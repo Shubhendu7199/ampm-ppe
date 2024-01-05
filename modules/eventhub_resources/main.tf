@@ -32,7 +32,7 @@ resource "azurerm_eventhub_namespace" "eventhub_namespace" {
 resource "azurerm_eventhub_namespace_authorization_rule" "eventhub_namespace_authorization_rule" {
   for_each = var.eventhub_resources
 
-  name                = "evhns-authrule-wpp-wt-ampm-${var.environment}-${var.client_name}-${each.value.authorization_rule.name}"
+  name                = "evhns-authrule-wt-ampm-${var.environment}-${var.client_name}-${each.value.authorization_rule.name}"
   namespace_name      = azurerm_eventhub_namespace.eventhub_namespace[each.key].name
   resource_group_name = var.resource_group_name
 
