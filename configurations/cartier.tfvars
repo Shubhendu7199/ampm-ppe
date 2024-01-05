@@ -35,7 +35,7 @@ storage_accounts = {
 }
 
 eventhub_resources = {
-  "EvenHubsNamespacee-wpp-wt" = {
+  "EvenHubsNamespace" = {
     sku = "Standard"
     network_rulesets = {
       default_action = "Deny"
@@ -81,7 +81,7 @@ eventhub_resources = {
 }
 
 key_vaults = {
-  "zarakishubhendu" = {
+  "01" = {
     sku = "standard"
     rbac = [
       {
