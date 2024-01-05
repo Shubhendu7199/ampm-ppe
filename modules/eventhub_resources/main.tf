@@ -59,7 +59,7 @@ resource "azurerm_eventhub_authorization_rule" "eventhub_authorization_rules" {
   for_each            = { for k, v in local.authorization_rule : k => v }
   name                = "evh-authrule-ampm-${var.environment}-${var.client_name}-${each.value.config.authorization_rule.name}"
   namespace_name      = "evhns-wpp-wt-ampm-${var.environment}-${var.client_name}-${each.value.namespace_name}"
-  eventhub_name       = each.value.eventhub_name
+  eventhub_name       = "evh-wpp-wt-ampm-${module.location-lookup.location-lookup["location_short"]}-${var.environment}-${var.client_name}-${each.value.eventhub_name}"
   resource_group_name = var.resource_group_name
   listen              = try(each.value.config.authorization_rule.listen, null)
   send                = try(each.value.config.authorization_rule.send, null)
@@ -73,7 +73,7 @@ resource "azurerm_eventhub_consumer_group" "eventhub_consumer_groups" {
   for_each            = { for k, v in local.consumer_groups : k => v }
   name                = "evh-consgrp-${module.location-lookup.location-lookup["location_short"]}-${var.environment}-${var.client_name}-${each.value.config.name}"
   namespace_name      = "evhns-wpp-wt-ampm-${var.environment}-${var.client_name}-${each.value.namespace_name}"
-  eventhub_name       = each.value.eventhub_name
+  eventhub_name       = "evh-wpp-wt-ampm-${module.location-lookup.location-lookup["location_short"]}-${var.environment}-${var.client_name}-${each.value.eventhub_name}"
   resource_group_name = var.resource_group_name
 
   depends_on = [azurerm_eventhub.eventhubs,
