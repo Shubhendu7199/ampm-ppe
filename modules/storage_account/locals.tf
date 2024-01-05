@@ -22,6 +22,7 @@ locals {
         quota            = share.quota
         access_tier      = share.access_tier
         enabled_protocol = share.enabled_protocol
+        index_number     = sa_config.index_number
       }
     ]
   ])
@@ -30,6 +31,7 @@ locals {
     for sa_name, sa_config in var.storage_accounts : [
       for container in coalesce(sa_config.containers, []) : {
         container_name = container.name
+        index_number   = sa_config.index_number
       }
     ]
   ])
