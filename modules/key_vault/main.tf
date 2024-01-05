@@ -6,7 +6,7 @@ module "location-lookup" {
 resource "azurerm_key_vault" "keyvault" {
   for_each = { for kv in local.keyvault : kv.keyvault_name => kv }
 
-  name                        = "kv-ampm-${var.environment}-${var.client_name}-${each.key}"
+  name                        = "kv-ampm-${var.client_name}-${var.environment}-${each.key}"
   resource_group_name         = var.resource_group_name
   location                    = var.rg_location
   sku_name                    = each.value.sku

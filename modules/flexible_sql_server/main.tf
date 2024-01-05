@@ -6,7 +6,7 @@ module "location-lookup" {
 resource "azurerm_mysql_flexible_server" "flexsqlserver" {
   for_each = var.sql_server
 
-  name                   = "sql-wpp-wt-ampm-${module.location-lookup.location-lookup["location_short"]}-${var.environment}-${var.client_name}-${each.key}"
+  name                   = "sql-wpp-wt-ampm-${var.client_name}-${module.location-lookup.location-lookup["location_short"]}-${var.environment}-${each.key}"
   location               = var.rg_location
   resource_group_name    = var.resource_group_name
   administrator_login    = "ampmdbadmin"
