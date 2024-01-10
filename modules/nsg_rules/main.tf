@@ -1,5 +1,5 @@
 resource "azurerm_network_security_rule" "example" {
-  for_each                    = { for k, v in local.nsg_rule : k => v.nsg_name }
+  for_each                    = { for k, v in local.nsg_rule : k => v }
   name                        = "${each.value.nsg_name}-${each.value.rule_name}"
   priority                    = each.value.rule.priority
   direction                   = each.value.rule.direction
