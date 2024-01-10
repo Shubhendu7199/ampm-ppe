@@ -10,7 +10,7 @@ resource "azurerm_linux_web_app" "app_services" {
   location            = var.rg_location
   resource_group_name = var.resource_group_name
 
-  service_plan_id = each.value.service_plan_id
+  service_plan_id = "/subscriptions/${var.subscription_id}/resourceGroups/${var.resource_group_name}/providers/Microsoft.Web/serverfarms/${each.value.service_plan_name}"
   enabled         = each.value.enabled
   https_only      = each.value.https_only
 
@@ -46,7 +46,7 @@ resource "azurerm_linux_web_app" "app_services" {
     each.value.app_settings
   )
 
-  virtual_network_subnet_id = each.value.vnet_connection.subnet_id
+  virtual_network_subnet_id = "/subscriptions/${var.subscription_id}/resourceGroups/${var.resource_group_name}/providers/Microsoft.Network/virtualNetworks/${each.value.vnet_connection.vnet_name}/subnets/${each.value.vnet_connection.subnet_name}"
 
   tags = each.value.tags
 }

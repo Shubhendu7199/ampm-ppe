@@ -44,6 +44,7 @@ module "nsg" {
   resource_group_name = azurerm_resource_group.ampm.name
   rg_location         = azurerm_resource_group.ampm.location
   nsg_rules           = var.nsg_rules
+  depends_on          = [module.network]
 }
 
 module "location-lookup" {
@@ -73,6 +74,7 @@ module "eventhub_resources" {
   environment                = var.environment
   client_name                = var.client_name
   region                     = var.region
+  subscription_id            = var.subscription_id
 }
 
 module "key_vault" {
@@ -139,6 +141,8 @@ module "app_services" {
   environment                = var.environment
   client_name                = var.client_name
   region                     = var.region
+  subscription_id            = var.subscription_id
+  depends_on                 = [module.app_service_plan]
 }
 
 

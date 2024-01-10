@@ -41,7 +41,8 @@ eventhub_resources = {
       default_action = "Deny"
       vnets = {
         vnet_rule01 = {
-          subnet_id = "/subscriptions/10e0ad56-8242-45e7-b95a-a64f4eb4542f/resourceGroups/rg-wpp-wt-ampm-cartier-ase-01/providers/Microsoft.Network/virtualNetworks/vnet-wt-ampm-cartier-ase-p-dmz-01/subnets/snet-wt-ampm-cartier-ase-p-dmz-subnet-01"
+          vnet_name   = "vnet-wt-ampm-cartier-ase-p-dmz-01"
+          subnet_name = "snet-wt-ampm-cartier-ase-p-dmz-subnet-01"
         }
       }
     }
@@ -180,9 +181,9 @@ app_service_plans = {
 
 app_services = {
   "app-service02-name" = {
-    service_plan_id = "/subscriptions/10e0ad56-8242-45e7-b95a-a64f4eb4542f/resourceGroups/rg-wpp-wt-ampm-cartier-ase-01/providers/Microsoft.Web/serverfarms/asp-wpp-wt-ampm-cartier-ase-p-app-service-plan2-name"
-    enabled         = true
-    https_only      = true
+    service_plan_name = "asp-wpp-wt-ampm-cartier-ase-p-app-service-plan2-name"
+    enabled           = true
+    https_only        = true
     site_config = {
       always_on          = true
       websockets_enabled = false
@@ -196,7 +197,8 @@ app_services = {
       "TZ"                 = "your_timezone"
     }
     vnet_connection = {
-      subnet_id = "/subscriptions/10e0ad56-8242-45e7-b95a-a64f4eb4542f/resourceGroups/rg-wpp-wt-ampm-cartier-ase-01/providers/Microsoft.Network/virtualNetworks/vnet-wt-ampm-cartier-ase-p-dmz-01/subnets/snet-wt-ampm-cartier-ase-p-dmz-subnet-01"
+      vnet_name   = "vnet-wt-ampm-cartier-ase-p-dmz-01"
+      subnet_name = "snet-wt-ampm-cartier-ase-p-dmz-subnet-01"
     }
     tags = {
       "Architectural Functional Group" = "Frontend"

@@ -22,7 +22,7 @@ resource "azurerm_eventhub_namespace" "eventhub_namespace" {
 
         content {
           ignore_missing_virtual_network_service_endpoint = false
-          subnet_id                                       = virtual_network_rule.value.subnet_id
+          subnet_id                                       = "/subscriptions/${var.subscription_id}/resourceGroups/${var.resource_group_name}/providers/Microsoft.Network/virtualNetworks/${virtual_network_rule.value.vnet_name}/subnets/${virtual_network_rule.value.subnet_name}"
         }
       }
     }

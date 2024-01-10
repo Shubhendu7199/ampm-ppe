@@ -4,7 +4,8 @@ variable "eventhub_resources" {
     network_rulesets = object({
       default_action = string
       vnets = map(object({
-        subnet_id = string
+        vnet_name   = string
+        subnet_name = string
       }))
     })
     authorization_rule = object({
@@ -50,4 +51,8 @@ variable "client_name" {
 variable "region" {
   type        = string
   description = "The Azure region where this component is to be deployed"
+}
+
+variable "subscription_id" {
+  type = string
 }

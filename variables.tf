@@ -134,7 +134,8 @@ variable "eventhub_resources" {
     network_rulesets = object({
       default_action = string
       vnets = map(object({
-        subnet_id = string
+        vnet_name   = string
+        subnet_name = string
       }))
     })
     authorization_rule = object({
@@ -230,9 +231,9 @@ variable "app_service_plans" {
 variable "app_services" {
   description = "Map of app services configuration."
   type = map(object({
-    service_plan_id = string
-    enabled         = bool
-    https_only      = bool
+    service_plan_name = string
+    enabled           = bool
+    https_only        = bool
 
     site_config = object({
       always_on          = bool
@@ -257,7 +258,8 @@ variable "app_services" {
     app_settings = map(string)
 
     vnet_connection = object({
-      subnet_id = string
+      vnet_name   = string
+      subnet_name = string
     })
 
     tags = map(string)
