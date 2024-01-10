@@ -77,20 +77,21 @@ variable "networks" {
 }
 
 variable "nsg_rules" {
-  type = map(object({
-    subnet_id = string
-    sec_rules = map(object({
-      name                       = string
-      priority                   = number
-      direction                  = string
-      access                     = string
-      protocol                   = string
-      source_port_range          = string
-      destination_port_range     = string
-      source_address_prefix      = string
-      destination_address_prefix = string
-    }))
-  }))
+  type = map(
+    map(
+      object({
+        priority                   = number
+        direction                  = string
+        access                     = string
+        protocol                   = string
+        source_port_range          = string
+        destination_port_range     = string
+        source_address_prefix      = string
+        destination_address_prefix = string
+      })
+    )
+  )
+  default = {}
 }
 
 variable "resource_group_name" {
