@@ -142,7 +142,7 @@ module "app_services" {
   client_name                = var.client_name
   region                     = var.region
   subscription_id            = var.subscription_id
-  depends_on                 = [module.app_service_plan]
+  depends_on                 = [module.app_service_plan, module.network]
 }
 
 
