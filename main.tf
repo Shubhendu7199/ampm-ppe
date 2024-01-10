@@ -39,6 +39,13 @@ module "network" {
   depends_on = [azurerm_resource_group.ampm]
 }
 
+module "nsg" {
+  source              = "./modules/nsg_rules"
+  resource_group_name = azurerm_resource_group.ampm.name
+  rg_location         = azurerm_resource_group.ampm.location
+  nsg_rules           = var.nsg_rules
+}
+
 module "location-lookup" {
   source   = "./modules/location-lookup"
   location = var.region

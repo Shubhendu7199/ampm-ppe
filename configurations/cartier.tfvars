@@ -228,4 +228,19 @@ servicebus_resources = {
   }
 }
 
+nsg_rules = {
+  "nsg-wt-ampm-cartier-ase-p-dmz-subnet-01" = {
+    "rule01_name" = {
+      priority                   = 101
+      direction                  = "Inbound"
+      access                     = "Allow"
+      protocol                   = "Tcp"
+      source_port_range          = "*"
+      destination_port_range     = "80"
+      source_address_prefix      = "*"
+      destination_address_prefix = "10.0.0.0/24"
+    }
+  }
+}
+
 
