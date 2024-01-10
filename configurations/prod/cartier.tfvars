@@ -46,11 +46,9 @@ eventhub_resources = {
         }
       }
     }
-
     authorization_rule = {
       name = "rule-01"
     }
-
     eventhubs = {
       "LineEvent" = {
         partition_count   = 8
@@ -64,7 +62,6 @@ eventhub_resources = {
           { name = "LineEventTracking" },
         ]
       }
-
       "CampaignInbound" = {
         partition_count   = 8
         message_retention = 7
