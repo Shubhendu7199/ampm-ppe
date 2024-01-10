@@ -1,5 +1,5 @@
 resource "azurerm_network_security_rule" "example" {
-  for_each                    = flatten([for nsg_name, nsg in var.nsg_rules : [for rule_name, rule in nsg : { nsg_name = nsg_name, rule_name = rule_name, rule = rule }]])
+  for_each                    = { for k, v in local.nsg_rule : k => v.nsg_name }
   name                        = "${each.value.nsg_name}-${each.value.rule_name}"
   priority                    = each.value.rule.priority
   direction                   = each.value.rule.direction
