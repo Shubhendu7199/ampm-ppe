@@ -73,20 +73,6 @@ variable "networks" {
           privateLinkServiceNetworkPolicies = optional(string)
         })
       )
-      vpn_config = optional(object({
-        type          = string
-        vpn_type      = string
-        sku           = string
-        active_active = optional(bool)
-        enable_bgp    = optional(bool)
-        local_networks = optional(list(object({
-          remote_name            = string,
-          connection_type        = optional(string, "IPsec")
-          connection_protocol    = optional(string, "IKEv1")
-          remote_gateway_address = string,
-          remote_address_space   = list(string)
-        })))
-      }))
     })
   )
 }

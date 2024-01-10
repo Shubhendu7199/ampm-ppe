@@ -5,4 +5,3 @@ resource "azurerm_network_security_group" "nsg" {
   location            = var.rg_location
   tags                = var.tags
 }
-
